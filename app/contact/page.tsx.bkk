@@ -1,0 +1,589 @@
+// 'use client'
+
+// import { activateSubmitBtn, onBlurHandler } from '@/lib/form-validate'
+// import Theme from '@/themes/light'
+// import { useRef } from 'react'
+// import { ThemeProvider, styled } from 'styled-components'
+
+// const SMain = styled.main`
+//     background-color: #eaf6ea;
+// `
+
+// const SSectionInner = styled.div`
+//     background-color: ${({ theme }) => theme.asideBackgroundColor};
+//     height: 10vh;
+// `
+
+// const FirstViewBox = styled.h1`
+//     font-size: 40px;
+//     font-weight: 600;
+//     width: 50%;
+//     height: 150px;
+//     text-align: center;
+//     margin: 0 auto;
+//     background-color: ${({ theme }) => theme.asideBackgroundColor};
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 40px;
+// `
+
+// const SFormWrapper = styled.div`
+//     width: 100vw;
+//     margin-top: 110px;
+//     display: flex;
+//     justify-content: center;
+// `
+
+// const CustomForm = ({
+//     className,
+//     children,
+//     ...props
+// }: {
+//     className?: string
+//     children: React.ReactNode
+// }) => (
+//     <form
+//         className={`validate__form ${className}`}
+//         method="POST"
+//         onSubmit={e => {
+//             e.preventDefault()
+//         }}
+//         noValidate
+//         autoComplete="off"
+//         {...props}>
+//         {children}
+//     </form>
+// )
+// const SFormInner = styled.div`
+//     background-color: white;
+//     padding: 60px;
+//     width: 80%;
+//     height: 100vh;
+//     border-radius: 80px;
+//     height: fit-content;
+// `
+
+// const SForm = styled(CustomForm)`
+//     margin: 0;
+//     padding: 0;
+// `
+
+// const SDl = styled.dl`
+//     display: flex;
+//     flex-direction: column;
+// `
+
+// const SDt = styled.dt`
+//     display: flex;
+//     align-items: center;
+
+//     & p {
+//         font-size: 20px;
+//         font-weight: 600;
+
+//         &::before {
+//             content: '必須';
+//             font-size: 10px;
+//             display: inline-block;
+//             margin-right: 10px;
+//             color: #f46804;
+//             vertical-align: middle;
+//             border: 1px solid #f46804;
+//             border-radius: 4px;
+//             padding: 0 6px;
+//         }
+//     }
+
+//     &.personal {
+//         margin-top: 50px;
+//     }
+
+//     &.is-response {
+//         margin-top: 50px;
+//     }
+// `
+
+// const SDd = styled.dd`
+//     margin-top: 10px;
+//     padding: 0;
+
+//     & + dt {
+//         margin-top: 50px;
+//     }
+
+//     & p {
+//         line-height: 1.75;
+//     }
+// `
+
+// const CustomInput = ({
+//     className,
+//     maxLength,
+//     type,
+//     name,
+//     placeholder,
+//     autofocus,
+//     required,
+//     pattern,
+//     invalidTargetRef,
+//     ...props
+// }: {
+//     maxLength?: number
+//     className?: string
+//     type: string
+//     name: string
+//     placeholder: string
+//     autofocus?: boolean
+//     required?: boolean
+//     pattern?: string
+//     invalidTargetRef: React.MutableRefObject<HTMLDivElement | null>
+// }) => (
+//     <input
+//         className={`validate__target ${className}`}
+//         type={type}
+//         name={name}
+//         placeholder={placeholder}
+//         autoFocus={autofocus}
+//         required={required}
+//         maxLength={maxLength}
+//         pattern={pattern}
+//         {...props}
+//         onBlur={e => {
+//             onBlurHandler(e, invalidTargetRef.current as HTMLDivElement)
+//         }}
+//     />
+// )
+
+// const SInput = styled(CustomInput)`
+//     outline: none;
+//     box-shadow: none;
+//     padding: 20px;
+//     border: 1px solid #dddddd;
+//     border-color: #dddddd;
+//     border-radius: 20px;
+//     font-size: auto;
+//     width: 100%;
+
+//     &::placeholder {
+//         color: #c7c7c7;
+//     }
+
+//     &.is-valid {
+//         border-color: #28a745;
+//         padding-right: calc(1.5em + 0.75rem);
+//         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+//         background-repeat: no-repeat;
+//         background-position: right calc(0.375em + 0.1875rem) center;
+//         background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+//     }
+
+//     &.is-invalid {
+//         border-color: #ff4136;
+//         padding-right: calc(1.5em + 0.75rem);
+//         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23ff4136' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff4136' stroke='none'/%3e%3c/svg%3e");
+//         background-repeat: no-repeat;
+//         background-position: right calc(0.375em + 0.1875rem) center;
+//         background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+//     }
+// `
+
+// const STextarea = styled.textarea`
+//     width: 100%;
+//     min-height: 277px;
+//     padding: 20px;
+//     border: 1px solid #dddddd;
+//     background: #fff;
+//     border-radius: 20px;
+//     font-size: auto;
+//     outline: none;
+
+//     &.is-valid {
+//         border-color: #28a745;
+//         padding-right: calc(1.5em + 0.75rem);
+//         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+//         background-repeat: no-repeat;
+//         background-position: right calc(0.375em + 0.1875rem) center;
+//         background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+//     }
+
+//     &.is-invalid {
+//         border-color: #ff4136;
+//         padding-right: calc(1.5em + 0.75rem);
+//         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23ff4136' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff4136' stroke='none'/%3e%3c/svg%3e");
+//         background-repeat: no-repeat;
+//         background-position: right calc(0.375em + 0.1875rem) center;
+//         background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+//     }
+// `
+
+// const SPadding = styled.p`
+//     padding: 0;
+//     margin: 0;
+//     margin-top: 20px;
+//     font-weight: 400;
+// `
+
+// const SInputRadio = styled.input`
+//     display: none;
+//     appearance: none;
+//     background: transparent;
+//     border: none;
+//     border-radius: 0;
+//     outline: none;
+
+//     &:checked + label:before {
+//         background-color: rgb(15, 132, 52);
+//     }
+// `
+
+// const SLabel = styled.label`
+//     position: relative;
+//     display: inline;
+//     padding-left: 30px;
+//     cursor: pointer;
+//     font-size: auto;
+
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         display: block;
+//         width: 20px;
+//         height: 20px;
+//         border: 1px solid #7e7e7e;
+//         border-radius: 4px;
+//         background: #fff;
+//         top: 0px;
+//         left: 3px;
+//     }
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         width: 12px;
+//         height: 5px;
+//         display: block;
+//         border-left: 2px solid #fff;
+//         border-bottom: 2px solid #fff;
+//         top: 7px;
+//         left: 7px;
+//         transform: rotate(-45deg);
+//     }
+// `
+
+// const SPaddingUnderLine = styled.dl`
+//     padding-bottom: 50px;
+//     border-bottom: 1px solid #dddddd;
+//     margin-top: 16px;
+// `
+
+// const SPersonalContainer = styled.div`
+//     padding: 30px 10px 0 30px;
+//     border-radius: 20px;
+//     border: 1px solid #dddddd;
+//     margin-top: 20px;
+// `
+
+// const SPersonalInner = styled.div`
+//     padding-right: 70px;
+//     height: 277px;
+//     overflow-y: scroll;
+
+//     &::-webkit-scrollbar {
+//         width: 10px;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//         background-color: rgb(15, 132, 52);
+//         border-radius: 4px;
+//     }
+// `
+
+// const SUl = styled.ul`
+//     font-size: 14px;
+//     line-height: 1.75;
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+// `
+
+// const SLi = styled.li`
+//     display: list-item;
+//     line-height: 1.75;
+
+//     &.last {
+//         margin-bottom: 60px;
+//     }
+// `
+
+// const SAgreeContainer = styled.p`
+//     text-align: center;
+//     margin-bottom: 50px;
+//     margin-top: 20px;
+// `
+
+// const SButton = styled.button`
+//     width: 200px;
+//     height: 60px;
+//     color: #fff;
+//     background-color: rgb(15, 132, 52);
+//     outline: none;
+//     cursor: pointer;
+//     margin: 0 auto;
+//     padding: 0 30px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     font-weight: 700;
+//     position: relative;
+//     z-index: 1;
+//     transition: 0.3s;
+//     font-size: 20px;
+//     border: none;
+
+//     &::before {
+//         content: '';
+//         width: 100%;
+//         height: 100%;
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         z-index: -1;
+//         border: none;
+//         background-color: #aeaeae;
+//         transform-origin: 100% 50%;
+//         transform: scaleX(0);
+//         transition: transform ease 0.3s;
+//     }
+//     &:hover {
+//         color: lightgreen;
+
+//         &::before {
+//             transform-origin: 0% 50%;
+//             transform: scaleX(1);
+//         }
+//     }
+//     &:disabled {
+//         opacity: 0.65;
+//         pointer-events: none;
+//     }
+//     &:not(:disabled) {
+//         cursor: pointer;
+//         opacity: 1;
+//     }
+// `
+
+// const CustomDiv = ({
+//     className,
+//     customRef,
+//     children,
+//     ...props
+// }: {
+//     className?: string
+//     customRef: React.MutableRefObject<HTMLDivElement | null>
+//     children?: React.ReactNode
+// }) => (
+//     <div
+//         ref={customRef}
+//         className={`invalid__feedback ${className}`}
+//         {...props}>
+//         {children}
+//     </div>
+// )
+
+// const SInvalidFeedback = styled(CustomDiv)`
+//     display: none;
+//     width: 100%;
+//     font-size: 80%;
+//     color: #ff4136;
+
+//     &.is-invalid {
+//         display: block;
+//     }
+// `
+
+// export default function Contact() {
+//     const emailRegex = /[\w\-\._]+@[\w\-\._]+\.[A-Za-z]+/
+//     const emailRegexStr = emailRegex.toString().slice(1).slice(0, -1)
+//     const nameInvalidFeedbackRef = useRef<HTMLDivElement>(null!)
+//     const emailInvalidFeedbackRef = useRef<HTMLDivElement>(null!)
+//     const contactContentInvalidFeedbackRef = useRef<HTMLDivElement>(null!)
+
+//     return (
+//         <ThemeProvider theme={Theme}>
+//             <SMain>
+//                 <SSectionInner>
+//                     <FirstViewBox>お問い合わせ</FirstViewBox>
+//                 </SSectionInner>
+//                 <SFormWrapper>
+//                     <SFormInner>
+//                         <SForm>
+//                             <SDl>
+//                                 <SDt>
+//                                     <p>お名前</p>
+//                                 </SDt>
+//                                 <SDd>
+//                                     <SInput
+//                                         type="text"
+//                                         name="お名前"
+//                                         placeholder="20文字以内で入力してください　(例)　山田　太郎"
+//                                         required
+//                                         autofocus
+//                                         maxLength={20}
+//                                         invalidTargetRef={
+//                                             nameInvalidFeedbackRef
+//                                         }
+//                                     />
+//                                 </SDd>
+//                                 <SDd>
+//                                     <SInvalidFeedback
+//                                         customRef={nameInvalidFeedbackRef}
+//                                     />
+//                                 </SDd>
+//                                 <SDt>
+//                                     <p>メールアドレス</p>
+//                                 </SDt>
+//                                 <SDd>
+//                                     <SInput
+//                                         type="mail"
+//                                         name="Email"
+//                                         placeholder="(例) abc@abc.com　(半角)"
+//                                         required
+//                                         pattern={emailRegexStr}
+//                                         invalidTargetRef={
+//                                             emailInvalidFeedbackRef
+//                                         }
+//                                     />
+//                                 </SDd>
+//                                 <SDd>
+//                                     <SInvalidFeedback
+//                                         customRef={emailInvalidFeedbackRef}
+//                                     />
+//                                 </SDd>
+//                                 <SDt>
+//                                     <p>お問い合わせ内容</p>
+//                                 </SDt>
+//                                 <SDd>
+//                                     <STextarea
+//                                         className="validate__target"
+//                                         name="お問い合わせ内容"
+//                                         placeholder="2000文字以内で入力してください"
+//                                         required
+//                                         onBlur={e => {
+//                                             onBlurHandler(
+//                                                 e,
+//                                                 contactContentInvalidFeedbackRef.current,
+//                                             )
+//                                         }}
+//                                     />
+//                                 </SDd>
+//                                 <SInvalidFeedback
+//                                     customRef={contactContentInvalidFeedbackRef}
+//                                 />
+//                                 <SDt className={'is-response'}>
+//                                     <p>お問い合わせへの回答は必要ですか？</p>
+//                                 </SDt>
+//                                 <SDd>
+//                                     <SPadding>
+//                                         <SInputRadio
+//                                             type="radio"
+//                                             id="radio01"
+//                                             name="回答の要不要"
+//                                             value="回答必要"
+//                                             onChange={activateSubmitBtn}
+//                                         />
+//                                         <SLabel htmlFor="radio01">必要</SLabel>
+//                                     </SPadding>
+//                                     <SPadding>
+//                                         <SInputRadio
+//                                             type="radio"
+//                                             id="radio02"
+//                                             name="回答の要不要"
+//                                             value="回答不要"
+//                                             onChange={activateSubmitBtn}
+//                                         />
+//                                         <SLabel htmlFor="radio02">不要</SLabel>
+//                                     </SPadding>
+//                                 </SDd>
+//                                 <SPaddingUnderLine />
+//                                 <SDt className={'personal'}>
+//                                     <p>個人情報の取り扱いについて</p>
+//                                 </SDt>
+//                                 <SDd className="personal">
+//                                     <p>
+//                                         以下の「個人情報の取り扱いについて」をご確認いただき、同意いただいた上で、画面下部にある「確認」ボタンをクリックしてください。
+//                                     </p>
+//                                     <SPersonalContainer>
+//                                         <SPersonalInner>
+//                                             <SUl>
+//                                                 <SLi>
+//                                                     個人情報の取り扱いについて
+//                                                 </SLi>
+//                                                 <SLi>
+//                                                     <dl>
+//                                                         <dt>
+//                                                             1.　個人情報の利用目的
+//                                                         </dt>
+//                                                         <dd>
+//                                                             取得した個人情報の利用目的については、問い合わせに関する返答及び諸連絡のために利用いたします。
+//                                                         </dd>
+//                                                     </dl>
+//                                                 </SLi>
+//                                                 <SLi>
+//                                                     <dl>
+//                                                         <dt>
+//                                                             2.　個人情報の第三者提供について
+//                                                         </dt>
+//                                                         <dd>
+//                                                             本人の同意がある場合又は法令に基づく場合を除き、取得した個人情報を第三者に提供することはありません。
+//                                                         </dd>
+//                                                     </dl>
+//                                                 </SLi>
+//                                                 <SLi>
+//                                                     <dl>
+//                                                         <dt>
+//                                                             3．個人情報の取扱いの委託について
+//                                                         </dt>
+//                                                         <dd>
+//                                                             取得した個人情報の取扱い全部又は、一部を委託することがありません。
+//                                                         </dd>
+//                                                     </dl>
+//                                                 </SLi>
+//                                                 <SLi className="last">
+//                                                     <dl>
+//                                                         <dt>
+//                                                             4．個人情報の安全管理措置について
+//                                                         </dt>
+//                                                         <dd>
+//                                                             クッキーやウェブビーコン等を用いるなどして、本人が容易に認識できない方法による個人情報の取得は行っておりません。
+//                                                             取得した個人情報については、漏えい、滅失又は毀損の防止と是正、その他個人情報の安全管理のために必要かつ適切な措置を講じます。
+//                                                         </dd>
+//                                                     </dl>
+//                                                 </SLi>
+//                                             </SUl>
+//                                         </SPersonalInner>
+//                                     </SPersonalContainer>
+//                                     <SAgreeContainer>
+//                                         <SInputRadio
+//                                             type="checkbox"
+//                                             id="check01"
+//                                             name="同意確認"
+//                                             value="同意します"
+//                                             required
+//                                             onChange={activateSubmitBtn}
+//                                         />
+//                                         <SLabel htmlFor="check01">
+//                                             個人情報の取扱いについて同意します
+//                                         </SLabel>
+//                                     </SAgreeContainer>
+//                                 </SDd>
+//                             </SDl>
+//                             <div>
+//                                 <SButton disabled>確認する</SButton>
+//                             </div>
+//                         </SForm>
+//                     </SFormInner>
+//                 </SFormWrapper>
+//             </SMain>
+//         </ThemeProvider>
+//     )
+// }
