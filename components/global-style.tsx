@@ -38,9 +38,10 @@ const SGlobalStyle = createGlobalStyle`
         color: black;
     }
   }
-  body{
+  body {
     font-family: 'Kaushan Script', cursive;
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
   }
 
   .img {

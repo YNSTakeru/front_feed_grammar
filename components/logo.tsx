@@ -18,7 +18,18 @@ const SLogoLink = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+
+    & span {
+        font-size: x-large;
+    }
+
+    @media (min-width: 768px) {
+        gap: 16px;
+
+        & span {
+            font-size: 32px;
+        }
+    }
 `
 
 const CustomImage = ({
@@ -45,7 +56,7 @@ const rotation = keyframes`
 `
 
 const SLogo = styled(CustomImage)`
-    margin-right: 16px;
+    margin-right: 4px;
     animation: ${rotation} 1s linear infinite;
     animation-play-state: paused;
 
@@ -54,6 +65,10 @@ const SLogo = styled(CustomImage)`
         css`
             animation-play-state: running;
         `}
+
+    @media (min-width: 768px) {
+        margin-right: 16px;
+    }
 `
 
 export function Logo({
