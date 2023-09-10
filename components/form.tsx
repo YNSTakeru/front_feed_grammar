@@ -504,7 +504,7 @@ export default function Contact() {
                                     await setTokenToCookie()
                                     try {
                                         const response = await axios.post(
-                                            '/tasks',
+                                            '/api/contact',
                                             convertDataToFormData(data),
                                         )
                                         if (!(+response.status == 204)) {
