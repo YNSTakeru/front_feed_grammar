@@ -1,17 +1,29 @@
 'use client'
 
+import { getWindowSize } from '@/hooks/get-window.size'
 import Theme from '@/themes/light'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ThemeProvider, styled } from 'styled-components'
 
-const SMainWrapper = styled.div`
+const CustomMainWrapper = ({
+    children,
+    width,
+    ...props
+}: {
+    children: React.ReactNode
+    width: number
+}) => <div {...props}>{children}</div>
+
+const SMainWrapper = styled(CustomMainWrapper)`
     padding: 16px;
     width: 100vw;
     height: ${({ theme }) => `calc(100vh - ${theme.headerHeight})`};
     display: flex;
     justify-content: center;
+    opacity: ${({ width }) => (width ? 1 : 0)};
+    transition: opacity 0.3s ease-in-out;
 `
 
 const SMain = styled.main`
@@ -26,10 +38,14 @@ const SMain = styled.main`
 `
 
 const STitle = styled.div`
-    font-size: 4.903vw;
+    font-size: xxx-large;
     font-weight: 300;
     align-self: center;
     justify-content: center;
+
+    @media (min-width: 768px) {
+        font-size: 4.903vw;
+    }
 `
 
 const SLogo = styled.div`
@@ -41,9 +57,22 @@ const SLogo = styled.div`
     align-self: start;
 `
 
-const CustomImage = ({ src, ...props }: { src: string; alt: string }) => {
+const CustomImage = ({
+    src,
+    isMobile,
+    ...props
+}: {
+    src: string
+    isMobile?: boolean
+    alt: string
+}) => {
     return (
-        <div style={{ position: 'relative', width: '10vw', height: '10vw' }}>
+        <div
+            style={{
+                position: 'relative',
+                width: `${isMobile ? '7em' : '10vw'}`,
+                height: `${isMobile ? '7em' : '10vw'}`,
+            }}>
             <Image src={src} fill {...props} />
         </div>
     )
@@ -56,6 +85,9 @@ const SContainer = styled.div`
     justify-content: center;
     align-items: center;
     align-self: start;
+
+    @media (min-width: 768px) {
+    }
 `
 
 const SH1 = styled.h1`
@@ -134,6 +166,8 @@ const SButton = styled(CustomButton)`
 export default function Home() {
     const [imgProps, setImgProps] = useState({ width: 0, height: 0 })
     const imgPercent = 0.090903
+    const [isMobile, setIsMobile] = useState(false)
+    const { height, width } = getWindowSize()
 
     useEffect(() => {
         setImgProps(prev => ({
@@ -144,21 +178,29 @@ export default function Home() {
 
     return (
         <ThemeProvider theme={Theme}>
-            <SMainWrapper>
-                <SMain>
-                    <SLogo>
-                        <SContainer>
-                            <STitle>Feed</STitle>
-                            <SImg src="/logo.svg" alt="ロゴ" />
-                        </SContainer>
-                        <STitle>Grammar</STitle>
-                    </SLogo>
-                    <SH1>
-                        YouTubeを使って英語耳を鍛えましょう。Feed
-                        Grammarは、実際の人々の話し方や文脈であなたの英語のイメージと実際の英語のギャップを縮めます。
-                    </SH1>
-                    <SButton>プレイする</SButton>
-                </SMain>
+            <SMainWrapper width={width}>
+                {width ? (
+                    <SMain>
+                        <SLogo>
+                            <SContainer>
+                                <STitle>Feed</STitle>
+                                <SImg
+                                    src="/logo.svg"
+                                    isMobile={width > 896 ? false : true}
+                                    alt="ロゴ"
+                                />
+                            </SContainer>
+                            <STitle>Grammar</STitle>
+                        </SLogo>
+                        <SH1>
+                            YouTubeを使って英語耳を鍛えましょう。Feed
+                            Grammarは、実際の人々の話し方や文脈であなたの英語のイメージと実際の英語のギャップを縮めます。
+                        </SH1>
+                        <SButton>プレイする</SButton>
+                    </SMain>
+                ) : (
+                    <></>
+                )}
             </SMainWrapper>
         </ThemeProvider>
     )
