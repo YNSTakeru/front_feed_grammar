@@ -41,7 +41,6 @@ const SGlobalStyle = createGlobalStyle`
   body {
     font-family: 'Kaushan Script', cursive;
     font-family: 'Open Sans', sans-serif;
-    overflow: hidden;
   }
 
   .img {

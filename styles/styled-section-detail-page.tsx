@@ -4,12 +4,19 @@ export const SSectionDetailPage = css`
     .section__detail__page {
         &__wrapper {
             height: max-content;
+            margin: 16px;
             margin-top: 64px;
-            border: gray solid 2px;
             padding: 24px;
+            width: 100vw;
+            border: gray solid 2px;
 
             @media (min-width: 896px) {
+                margin: 0;
+                margin-top: 64px;
+
                 margin-top: 32px;
+                border: gray solid 2px;
+                width: 'fit-content';
             }
         }
         &__arrow__utern__left__icon {
