@@ -6,29 +6,47 @@ import Link from 'next/link'
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
+const CustomLink = ({
+    id,
+    title,
+    onClick,
+}: {
+    id: number
+    title: string
+    onClick: (event: React.MouseEvent<HTMLAnchorElement>) => void
+}) => (
+    <Link onClick={onClick} href={`/section-list/${+id}?title=${title}`}>
+        {title}
+    </Link>
+)
+
 const ULi = styled.li`
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 8px 16px;
+    padding-left: 32px;
+
+    &:last-child {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 768px) {
+        border: none;
+        padding: 0px;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
 `
-
-function setSectionListToStore({
-    sectionListFromServer,
-    sectionListFromStore,
-}: {
-    sectionListFromServer: Section[]
-    sectionListFromStore: Section[]
-}) {
-    if (sectionListFromStore) return
-
-    useStore.setState(state => ({
-        sectionList: [...sectionListFromServer],
-    }))
-}
 
 export default function SectionList({
     sectionList,
+    clickHandler,
 }: {
     sectionList: Section[]
+    clickHandler?: () => void
 }) {
     let storeSectionList = useStore.getState().sectionList
 
@@ -45,7 +63,9 @@ export default function SectionList({
         <>
             {sectionList.map(({ id, title }) => (
                 <ULi key={id}>
-                    <Link href={`/section-list/${id}?title=${title}`}>
+                    <Link
+                        onClick={clickHandler}
+                        href={`/section-list/${id}?title=${title}`}>
                         {title}
                     </Link>
                 </ULi>

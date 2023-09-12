@@ -3,8 +3,11 @@ import { css } from 'styled-components'
 export const SSectionList = css`
     .section__list {
         &__div {
-            padding: 16px;
+            @media (min-width: 768px) {
+                padding: 16px;
+            }
         }
+
         &__padding {
             margin-bottom: 12px;
             padding-bottom: 12px;

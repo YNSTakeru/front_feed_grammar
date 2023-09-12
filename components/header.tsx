@@ -21,15 +21,6 @@ const SHeader = styled.header`
 `
 
 export default function Header() {
-    // function disableScroll(event: MouseEvent | TouchEvent) {
-    //     event.preventDefault()
-    // }
-    // useEffect(() => {
-    //     document.addEventListener('touchmove', disableScroll, {
-    //         passive: false,
-    //     })
-    // }, [])
-
     return (
         <ThemeProvider theme={{ ...Theme }}>
             <SHeader>

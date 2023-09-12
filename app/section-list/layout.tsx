@@ -1,4 +1,4 @@
-import FetchSectionList from '@/components/fetch-section-list'
+import SectionListAside from '@/components/section-list-aside'
 import { fetchSectionList } from '@/lib/fetchData'
 import React from 'react'
 
@@ -26,7 +26,7 @@ export default async function SectionLayout({
     return (
         <SSection>
             <SAside>
-                <FetchSectionList sectionList={sectionList} />
+                <SectionListAside sectionList={sectionList} />
             </SAside>
             <SMain>{children}</SMain>
         </SSection>
