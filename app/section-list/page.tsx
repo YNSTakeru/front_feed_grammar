@@ -12,13 +12,17 @@ function SPadding({ children }: { children: React.ReactNode }) {
 }
 
 const SMain = styled.div`
-    width: 75vw;
-    height: ${({ theme }) => `calc(100vh - ${theme.headerHeight})`};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    white-space: nowrap;
+    display: none;
+
+    @media (min-width: 768px) {
+        display: flex;
+        width: 75vw;
+        height: ${({ theme }) => `calc(100vh - ${theme.headerHeight})`};
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        white-space: nowrap;
+    }
 `
 
 export default function SectionPage() {

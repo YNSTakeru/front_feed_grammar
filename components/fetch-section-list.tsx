@@ -1,4 +1,8 @@
-import { fetchSectionList } from '@/lib/fetchData'
+// Todo クライアントコンポーネントにできる、styled_componentsに切り替える
+'use client'
+
+import { getWindowSize } from '@/hooks/get-window.size'
+import { Section } from '@/types/database/tables'
 import SectionList from './section-list'
 
 function SDiv({ children }: { children: React.ReactNode }) {
@@ -13,15 +17,25 @@ function SUl({ children }: { children: React.ReactNode }) {
     return <ul className="section__list__ul">{children}</ul>
 }
 
-export default async function FetchSectionList() {
-    const sectionList = await fetchSectionList()
-
+export default function FetchSectionList({
+    sectionList,
+}: {
+    sectionList: Section[]
+}) {
+    // Todo styled-componentsでtransitionさせる
+    const { width } = getWindowSize()
     return (
-        <SDiv>
-            <SPadding>単元一覧</SPadding>
-            <SUl>
-                <SectionList sectionList={sectionList} />
-            </SUl>
-        </SDiv>
+        <>
+            {width <= 896 ? (
+                <></>
+            ) : (
+                <SDiv>
+                    <SPadding>単元一覧</SPadding>
+                    <SUl>
+                        <SectionList sectionList={sectionList} />
+                    </SUl>
+                </SDiv>
+            )}
+        </>
     )
 }

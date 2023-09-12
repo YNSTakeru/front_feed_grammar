@@ -6,11 +6,17 @@ export const SSectionListLayout = css`
             display: flex;
         }
         &__aside {
-            height: initial;
-            width: 25%;
-            background-color: ${({ theme }) => theme.asideBackgroundColor};
-            padding: 8px;
-            min-height: ${({ theme }) => `calc(100vh - ${theme.headerHeight})`};
+            display: none;
+
+            @media (min-width: 768px) {
+                display: block;
+                height: initial;
+                width: 25%;
+                background-color: ${({ theme }) => theme.asideBackgroundColor};
+                padding: 8px;
+                min-height: ${({ theme }) =>
+                    `calc(100vh - ${theme.headerHeight})`};
+            }
         }
         &__div {
             display: flex;
