@@ -16,7 +16,7 @@ export const SSectionDetailPage = css`
 
                 margin-top: 32px;
                 border: gray solid 2px;
-                width: 'fit-content';
+                width: auto;
             }
         }
         &__arrow__utern__left__icon {
