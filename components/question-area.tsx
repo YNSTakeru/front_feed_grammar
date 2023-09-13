@@ -36,13 +36,17 @@ const CustomUl = ({
 }) => <ul {...props}>{children}</ul>
 
 const SUl = styled(CustomUl)`
-    padding: 20px 0;
+    padding: 20px 20px;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 20px;
     cursor: ${({ isLoaded }) => (isLoaded ? 'cursor' : 'wait')};
     max-width: 100%;
+
+    @media (min-width: 768px) {
+        padding: 20px 0;
+    }
 `
 
 const CustomAnswerAreaDiv = ({
@@ -64,6 +68,13 @@ const SAnswerArea = styled(CustomAnswerAreaDiv)`
     line-height: 1.3;
     min-height: 41.5938px;
     border-bottom: 1px solid;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-width: 768px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 `
 
 const CustomLi = ({

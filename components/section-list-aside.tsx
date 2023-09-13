@@ -69,6 +69,7 @@ const SMobileSectionListMenu = styled(CustomMobileSectionListMenu)`
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    z-index: 6;
 
     background-color: ${({ theme }) => theme.asideBackgroundColor};
 
