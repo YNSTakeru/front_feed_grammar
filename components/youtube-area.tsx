@@ -61,7 +61,7 @@ export default function YouTubeArea({
     useLayoutEffect(() => {
         setOpts(prev => ({
             height: '390',
-            width: `${width}px`,
+            width: `${width}`,
             playerVars: {
                 autoplay: 1 as 1,
                 mute: 1 as 1,

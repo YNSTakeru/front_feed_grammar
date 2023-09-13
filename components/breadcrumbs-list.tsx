@@ -18,7 +18,12 @@ const CustomNav = ({
 const SNav = styled(CustomNav)`
     font-size: 14px;
     padding: 32px 0 22px 0;
+    padding-left: 20px;
     width: ${({ width }) => `${width}px`};
+
+    @media (min-width: 768px) {
+        padding-left: 0;
+    }
 `
 
 const SUl = styled.ul`

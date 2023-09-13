@@ -141,7 +141,9 @@ function getSimilarBreadcrumbsListContents({
 }
 
 const SContainer = styled.div`
-    margin: 0 40.5px;
+    @media (min-width: 768px) {
+        margin: 0 40.5px;
+    }
 `
 
 const SMainWrapper = styled.div`
@@ -160,6 +162,11 @@ const STitle = styled.div`
     font-size: 32px;
     font-weight: 500;
     line-height: 1.3;
+    display: none;
+
+    @media (min-width: 768px) {
+        display: block;
+    }
 `
 
 export default function QuestionDetail({
@@ -220,7 +227,8 @@ export default function QuestionDetail({
     })!
 
     useEffect(() => {
-        setPageWidth(prev => window.innerWidth * 0.5 - 15)
+        const padding = window.innerWidth > 896 ? 15 : 0
+        setPageWidth(prev => window.innerWidth * 0.5 - padding)
         setDisplay(prev => true)
     }, [])
 
