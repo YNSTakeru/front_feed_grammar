@@ -29,9 +29,9 @@ const SSectionInner = styled.div`
 `
 
 const FirstViewBox = styled.h1`
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 600;
-    width: 50%;
+    width: 80%;
     height: 150px;
     text-align: center;
     margin: 0 auto;
@@ -40,6 +40,11 @@ const FirstViewBox = styled.h1`
     justify-content: center;
     align-items: center;
     border-radius: 40px;
+
+    @media (min-width: 768px) {
+        font-size: 40px;
+        width: 50%;
+    }
 `
 
 const SFormWrapper = styled.div`
@@ -71,11 +76,18 @@ const CustomForm = ({
 )
 const SFormInner = styled.div`
     background-color: white;
-    padding: 60px;
-    width: 80%;
+    padding: 60px 40px;
+    width: 100%;
     height: 100vh;
-    border-radius: 80px;
+    border-radius: 8px;
+
     height: fit-content;
+
+    @media (min-width: 768px) {
+        padding: 60px;
+        width: 80%;
+        border-radius: 80px;
+    }
 `
 
 const SForm = styled(CustomForm)`
