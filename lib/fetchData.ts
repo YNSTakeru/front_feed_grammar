@@ -10,15 +10,13 @@ async function fetchISR(url: string) {
 }
 
 export async function fetchSectionList() {
-    const res = await fetchISR(`${process.env.url}/sections`)
-
-    const resJson = await res.json()
-    const sectionList: Section[] = resJson.sections
+    const res = await fetchISR(`${process.env.URL}/api/sections`)
+    const sectionList: Section[] = await res.json()
     return sectionList
 }
 
 export async function fetchQuestionList(sectionId: number) {
-    const res = await fetchISR(`${process.env.url}/sections/${sectionId}`)
+    const res = await fetchISR(`${process.env.URL}/api/sections/${sectionId}`)
     const resJson = await res.json()
 
     const questionList: Question[] = resJson.questions
@@ -33,7 +31,7 @@ export async function fetchNextQuestion({
     questionId: number
 }) {
     const res = await fetchISR(
-        `${process.env.url}/sections/${sectionId}/questions/${questionId}/next`,
+        `${process.env.URL}/sections/${sectionId}/questions/${questionId}/next`,
     )
 
     const resJson = await res.json()
@@ -50,7 +48,7 @@ export async function fetchPreviousQuestion({
     questionId: number
 }) {
     const res = await fetchISR(
-        `${process.env.url}/sections/${sectionId}/questions/${questionId}/previous`,
+        `${process.env.URL}/sections/${sectionId}/questions/${questionId}/previous`,
     )
 
     const resJson = await res.json()
@@ -71,7 +69,7 @@ export async function fetchQuestionDetail(questionId: number) {
 }
 
 async function fetchUrls(questionId: number) {
-    const res = await fetchISR(`${process.env.url}/questions/${questionId}`)
+    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
 
     const resJson = await res.json()
 
@@ -81,7 +79,7 @@ async function fetchUrls(questionId: number) {
 }
 
 export async function fetchVideos(questionId: number) {
-    const res = await fetchISR(`${process.env.url}/questions/${questionId}`)
+    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
 
     const resJson = await res.json()
 
@@ -91,7 +89,7 @@ export async function fetchVideos(questionId: number) {
 }
 
 async function fetchVideo(urlId: number) {
-    const res = await fetchISR(`${process.env.url}/urls/${urlId}`)
+    const res = await fetchISR(`${process.env.URL}/urls/${urlId}`)
 
     const resJson = await res.json()
 
@@ -108,7 +106,7 @@ export async function fetchNextVideo({
     videoId: number
 }) {
     const res = await fetchISR(
-        `${process.env.url}/questions/${questionId}/videos/${videoId}/next`,
+        `${process.env.URL}/questions/${questionId}/videos/${videoId}/next`,
     )
 
     const resJson = await res.json()
@@ -126,7 +124,7 @@ export async function fetchPreviousVideo({
     videoId: number
 }) {
     const res = await fetchISR(
-        `${process.env.url}/questions/${questionId}/videos/${videoId}/previous`,
+        `${process.env.URL}/questions/${questionId}/videos/${videoId}/previous`,
     )
 
     const resJson = await res.json()
@@ -137,7 +135,7 @@ export async function fetchPreviousVideo({
 }
 
 async function fetchWords(videoId: number) {
-    const res = await fetchISR(`${process.env.url}/words/${videoId}`)
+    const res = await fetchISR(`${process.env.URL}/words/${videoId}`)
 
     const resJson = await res.json()
 
