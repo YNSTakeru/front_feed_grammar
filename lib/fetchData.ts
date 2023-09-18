@@ -9,8 +9,10 @@ async function fetchISR(url: string) {
     return res
 }
 
-export async function fetchSectionList() {
-    const res = await fetchISR(`${process.env.URL}/api/sections`)
+export async function fetchSectionList(pageNum = 1) {
+    const res = await fetchISR(
+        `${process.env.URL}/api/sections?page=${pageNum}`,
+    )
     const sectionList: Section[] = await res.json()
     return sectionList
 }
