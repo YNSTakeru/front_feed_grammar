@@ -11,6 +11,11 @@ export type Question = {
     theme: string
 }
 
+export type QuestionLink = {
+    previousId: number
+    nextId: number
+}
+
 export type Url = {
     id: number
     url: string

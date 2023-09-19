@@ -5,7 +5,6 @@ export default async function QuestionDetailPage({
     params,
 }: QuestionDetailPageProps) {
     const { questionId, sectionId } = params
-    // データベースから値を取得する
 
     return (
         <>

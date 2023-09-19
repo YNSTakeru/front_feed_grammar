@@ -1,5 +1,10 @@
-import { Question, Section, Url, Video, Word } from '@/types/database/tables'
-import { getRandomValueFromArray } from './array'
+import {
+    Question,
+    QuestionLink,
+    Section,
+    Video,
+    Word,
+} from '@/types/database/tables'
 
 async function fetchISR(url: string) {
     const res = await fetch(url, { next: { revalidate: 10 } })
@@ -18,10 +23,12 @@ export async function fetchSectionList(pageNum = 1) {
 }
 
 export async function fetchQuestionList(sectionId: number) {
-    const res = await fetchISR(`${process.env.URL}/api/sections/${sectionId}`)
-    const resJson = await res.json()
+    const res = await fetchISR(
+        `${process.env.URL}/api/questions?filter[section_id]=${sectionId}`,
+    )
+    const questionList: Question[] = (await res.json()).data
+    console.log(questionList)
 
-    const questionList: Question[] = resJson.questions
     return questionList
 }
 
@@ -59,35 +66,20 @@ export async function fetchPreviousQuestion({
     return question
 }
 
-export async function fetchQuestionDetail(questionId: number) {
-    const urls = await fetchUrls(questionId)
-    const { url, id } = getRandomValueFromArray(urls)
-    const urlId = id
-    const video = await fetchVideo(urlId)
-    const videoId = video.id
-    const words = await fetchWords(videoId)
-
-    return { video, url, words }
-}
-
-async function fetchUrls(questionId: number) {
-    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
-
-    const resJson = await res.json()
-
-    const urls: Url[] = resJson.urls
-
-    return urls
+export async function fetchQuestionLink(questionId: number) {
+    const res = await fetchISR(`${process.env.URL}/api/questions/${questionId}`)
+    const question: QuestionLink = await res.json()
+    return question
 }
 
 export async function fetchVideos(questionId: number) {
-    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
+    const res = await fetchISR(
+        `${process.env.URL}/api/videos?filter[question_id]=${questionId}`,
+    )
 
-    const resJson = await res.json()
+    const videos: Video[] = (await res.json()).data
 
-    const video: Video[] = resJson.videos
-
-    return video
+    return videos
 }
 
 async function fetchVideo(urlId: number) {

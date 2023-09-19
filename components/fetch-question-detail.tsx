@@ -1,8 +1,4 @@
-import {
-    fetchNextQuestion,
-    fetchPreviousQuestion,
-    fetchVideos,
-} from '@/lib/fetchData'
+import { fetchQuestionLink, fetchVideos } from '@/lib/fetchData'
 import QuestionDetail from './question-detail'
 
 export default async function FetchQuestionDetail({
@@ -13,19 +9,15 @@ export default async function FetchQuestionDetail({
     sectionId: number
 }) {
     const videos = await fetchVideos(questionId)
-    const nextQuestion = await fetchNextQuestion({ sectionId, questionId })
-    const previousQuestion = await fetchPreviousQuestion({
-        sectionId,
-        questionId,
-    })
+    const { previousId, nextId } = await fetchQuestionLink(questionId)
 
     return (
         <QuestionDetail
             videos={videos}
             questionId={questionId}
             sectionId={sectionId}
-            nextData={nextQuestion}
-            previousData={previousQuestion}
+            nextId={nextId}
+            previousId={previousId}
         />
     )
 }

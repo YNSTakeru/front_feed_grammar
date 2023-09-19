@@ -13,7 +13,7 @@ import {
     getSectionHrefWithQuery,
 } from '@/lib/href'
 import { getUrlQuery } from '@/lib/url-query'
-import { Question, Video } from '@/types/database/tables'
+import { Video } from '@/types/database/tables'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import BreadcrumbsList from './breadcrumbs-list'
@@ -21,6 +21,12 @@ import ProgressBar from './progress-bar'
 import QuestionArea from './question-area'
 import QuestionPagination from './question-pagination'
 import YouTubeArea from './youtube-area'
+
+type Videos = {
+    video: Video
+    previousVideo?: Video | null
+    nextVideo?: Video | null
+}
 
 type BreadcrumbsListProps = QuestionHrefQuery & {
     sectionId: number
@@ -41,11 +47,11 @@ function getVideos({
     isSimilar?: boolean
     videoId?: number
     props: VideoProps
-}) {
+}): Videos {
     const { videos, startSimilarVideoId, endSimilarVideoId } = props
 
     if (isSimilar) {
-        const video = videos.filter(({ id }) => id == videoId)[0]
+        const video = videos.filter(({ id }) => id == videoId)[0]!
 
         let nextVideo = (getNextArrayValue({
             arry: videos,
@@ -68,9 +74,9 @@ function getVideos({
     const nextVideo = (getNextArrayValue({
         arry: videos,
         id: video.id,
-    }) as unknown) as Video
+    }) as unknown) as Video | null
 
-    return { video, nextVideo }
+    return { video, nextVideo, previousVideo: null }
 }
 function getBreadcrumbsListContents({
     isSimilar,
@@ -173,18 +179,18 @@ export default function QuestionDetail({
     videos,
     questionId,
     sectionId,
-    nextData,
-    previousData,
     isSimilar,
     videoId,
+    previousId,
+    nextId,
 }: {
     videos: Video[]
     questionId: number
     sectionId: number
-    nextData?: Question | Video
-    previousData?: Question | Video
     isSimilar?: boolean
     videoId?: number
+    nextId?: number
+    previousId?: number
 }) {
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
@@ -226,6 +232,36 @@ export default function QuestionDetail({
         props: videoProps,
     })!
 
+    function getPreviousId({
+        isSimilar,
+        previousId,
+        paginateVideos,
+    }: {
+        isSimilar?: boolean
+        previousId?: number
+        paginateVideos: Videos
+    }) {
+        if (isSimilar)
+            return paginateVideos.previousVideo
+                ? paginateVideos.previousVideo.id
+                : null
+        return previousId
+    }
+
+    function getNextId({
+        isSimilar,
+        nextId,
+        paginateVideos,
+    }: {
+        isSimilar?: boolean
+        nextId?: number
+        paginateVideos: Videos
+    }) {
+        if (isSimilar)
+            return paginateVideos.nextVideo ? paginateVideos.nextVideo.id : null
+        return nextId
+    }
+
     useEffect(() => {
         const padding = window.innerWidth > 896 ? 15 : 0
         setPageWidth(prev => window.innerWidth * 0.5 - padding)
@@ -264,19 +300,19 @@ export default function QuestionDetail({
                             sectionId={+sectionId}
                             content={content}
                             sectionTitle={sectionTitle}
-                            prev={
-                                previousData
-                                    ? previousData
-                                    : paginateVideos.previousVideo
-                                    ? (paginateVideos.previousVideo as Video)
-                                    : undefined
+                            previousId={
+                                getPreviousId({
+                                    isSimilar,
+                                    previousId,
+                                    paginateVideos,
+                                }) as number | undefined
                             }
-                            next={
-                                nextData
-                                    ? nextData
-                                    : paginateVideos.nextVideo
-                                    ? (paginateVideos.nextVideo as Video)
-                                    : undefined
+                            nextId={
+                                getNextId({
+                                    isSimilar,
+                                    nextId,
+                                    paginateVideos,
+                                }) as number | undefined
                             }
                             startSimilarVideoId={
                                 !isSimilar
