@@ -1,3 +1,22 @@
+type Collection<T> = {
+    data: T[]
+    links: {
+        first: string
+        last: string
+        prev: string
+        next: string
+    }
+    meta: {
+        current_page: number
+        from: number
+        last_page: number
+        links: [[Object], [Object], [Object]]
+        path: string
+        per_page: number
+        to: number
+        total: number
+    }
+}
 export type Section = {
     id: number
     title: string
@@ -11,9 +30,13 @@ export type Question = {
     theme: string
 }
 
+export type SectionCollection = Collection<Section>
+
+export type QuestionCollection = Collection<Question>
+
 export type QuestionLink = {
-    previousId: number
-    nextId: number
+    previousQuestion: Question
+    nextQuestion: Question
 }
 
 export type Url = {

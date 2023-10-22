@@ -1,5 +1,5 @@
 import SectionListAside from '@/components/section-list-aside'
-import { fetchSectionList } from '@/lib/fetchData'
+import { fetchSectionListData } from '@/lib/fetchData'
 import React from 'react'
 
 function SSection({ children }: { children: React.ReactNode }) {
@@ -21,12 +21,11 @@ export default async function SectionLayout({
 }: {
     children: React.ReactNode
 }) {
-    const sectionList = await fetchSectionList()
-
+    const sectionListData = await fetchSectionListData()
     return (
         <SSection>
             <SAside>
-                <SectionListAside sectionList={sectionList} />
+                <SectionListAside sectionListData={sectionListData} />
             </SAside>
             <SMain>{children}</SMain>
         </SSection>

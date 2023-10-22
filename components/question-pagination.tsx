@@ -15,7 +15,7 @@ import {
     useIsSolvedStore,
 } from '@/store'
 import Theme from '@/themes/light'
-import { Video } from '@/types/database/tables'
+import { Question, Video } from '@/types/database/tables'
 
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
@@ -141,6 +141,8 @@ const CustomLink = ({
     isPrev,
     previousId,
     nextId,
+    previousQuestion,
+    nextQuestion,
     queryProps,
     children,
     ...props
@@ -152,6 +154,8 @@ const CustomLink = ({
     isPrev?: boolean
     previousId?: number
     nextId?: number
+    previousQuestion?: Question
+    nextQuestion?: Question
     queryProps: QueryProps
     children: React.ReactNode
 }) => {
@@ -446,6 +450,8 @@ export default function QuestionPagination({
     sectionTitle,
     previousId,
     nextId,
+    nextQuestion,
+    previousQuestion,
     startSimilarVideoId,
     endSimilarVideoId,
     questionTheme,
@@ -460,6 +466,8 @@ export default function QuestionPagination({
     sectionTitle: string
     previousId?: number
     nextId?: number
+    nextQuestion?: Question
+    previousQuestion?: Question
     startSimilarVideoId: number
     endSimilarVideoId: number
     questionTheme: string

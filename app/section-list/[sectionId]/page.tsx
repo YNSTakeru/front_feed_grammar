@@ -39,7 +39,7 @@ export default async function SectionDetailPage({
                     <FetchQuestionList sectionId={+sectionId} />
                 </Suspense>
             </SUl>
-            <Link href={`section-list`}>
+            <Link href={`/section-list`}>
                 <SArrowUturnLeftIcon />
             </Link>
         </SSectionDetailPageWrapper>

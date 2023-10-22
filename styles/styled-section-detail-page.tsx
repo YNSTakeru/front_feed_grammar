@@ -13,10 +13,10 @@ export const SSectionDetailPage = css`
             @media (min-width: 896px) {
                 margin: 0;
                 margin-top: 64px;
-
                 margin-top: 32px;
                 border: gray solid 2px;
                 width: auto;
+                min-width: 50%;
             }
         }
         &__arrow__utern__left__icon {

@@ -13,7 +13,7 @@ import {
     getSectionHrefWithQuery,
 } from '@/lib/href'
 import { getUrlQuery } from '@/lib/url-query'
-import { Video } from '@/types/database/tables'
+import { Question, Video } from '@/types/database/tables'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import BreadcrumbsList from './breadcrumbs-list'
@@ -181,16 +181,16 @@ export default function QuestionDetail({
     sectionId,
     isSimilar,
     videoId,
-    previousId,
-    nextId,
+    previousQuestion,
+    nextQuestion,
 }: {
     videos: Video[]
     questionId: number
     sectionId: number
     isSimilar?: boolean
     videoId?: number
-    nextId?: number
-    previousId?: number
+    nextQuestion?: Question
+    previousQuestion?: Question
 }) {
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
@@ -202,6 +202,8 @@ export default function QuestionDetail({
     const endQuestionId = +getUrlQuery('end-question-id')!
     const startSimilarVideoId = +getUrlQuery('start-similar-video-id')!
     const endSimilarVideoId = +getUrlQuery('end-similar-video-id')!
+    const previousId = previousQuestion ? previousQuestion.id : null
+    const nextId = nextQuestion ? nextQuestion.id : null
 
     const breadcrumbsListProps: BreadcrumbsListProps = {
         questionContent: content,
@@ -238,14 +240,14 @@ export default function QuestionDetail({
         paginateVideos,
     }: {
         isSimilar?: boolean
-        previousId?: number
+        previousId?: number | null
         paginateVideos: Videos
     }) {
         if (isSimilar)
             return paginateVideos.previousVideo
                 ? paginateVideos.previousVideo.id
                 : null
-        return previousId
+        return previousQuestion
     }
 
     function getNextId({
@@ -254,7 +256,7 @@ export default function QuestionDetail({
         paginateVideos,
     }: {
         isSimilar?: boolean
-        nextId?: number
+        nextId?: number | null
         paginateVideos: Videos
     }) {
         if (isSimilar)
@@ -314,6 +316,8 @@ export default function QuestionDetail({
                                     paginateVideos,
                                 }) as number | undefined
                             }
+                            previousQuestion={previousQuestion}
+                            nextQuestion={nextQuestion}
                             startSimilarVideoId={
                                 !isSimilar
                                     ? (paginateVideos.nextVideo as Video).id
