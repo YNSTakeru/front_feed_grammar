@@ -1,10 +1,16 @@
 'use client'
 
 import Theme from '@/themes/light'
-import { Question, Video } from '@/types/database/tables'
 import Link from 'next/link'
 import { useRef } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
+
+type Question = {
+    content: string
+    id: number
+    section_id: number
+    theme: string
+}
 
 type QueryProps = {
     sectionTitle: string
@@ -39,16 +45,20 @@ const SNav = styled(CustomNav)`
     align-items: center;
 `
 const CustomLink = ({
-    queryProps,
-    previousQuestion,
+    title,
+    question,
     children,
     ...props
 }: {
-    queryProps: QueryProps
-    previousQuestion: Question
+    title: string
+    question: Question | undefined
     children: React.ReactNode
 }) => {
-    const href = '/'
+    if (!question) return <div>{children}</div>
+
+    const { content, id, section_id, theme } = question!
+
+    const href = `/section-list/${section_id}/question/${id}?title=${title}&content=${content}&question-theme=${theme}`
 
     return (
         <Link href={href} {...props}>
@@ -60,42 +70,24 @@ const CustomLink = ({
 const SLink = styled(CustomLink)``
 
 export default function QuestionPagination({
-    video,
-    questionId,
-    sectionId,
-    sectionTitle,
-    content,
-    questionTheme,
+    title,
     nextQuestion,
     previousQuestion,
 }: {
-    video: Video
-    questionId: number
-    sectionId: number
-    content: string
-    sectionTitle: string
-    questionTheme: string
-    nextQuestion: Question
-    previousQuestion: Question
+    title: string
+    nextQuestion: Question | undefined
+    previousQuestion: Question | undefined
 }) {
     const navRef = useRef<HTMLDivElement>(null!)
-
-    const queryProps = {
-        sectionId,
-        sectionTitle,
-        questionId,
-        content,
-        questionTheme,
-    }
-    console.log(previousQuestion)
 
     return (
         <ThemeProvider theme={{ ...Theme }}>
             <SNav customRef={navRef}>
-                <SLink
-                    queryProps={queryProps}
-                    previousQuestion={previousQuestion}>
+                <SLink title={title} question={previousQuestion}>
                     前の問題
+                </SLink>
+                <SLink title={title} question={nextQuestion}>
+                    次の問題
                 </SLink>
             </SNav>
         </ThemeProvider>

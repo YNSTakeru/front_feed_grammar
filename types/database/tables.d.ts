@@ -26,6 +26,7 @@ export type Section = {
 
 export type Question = {
     id: number
+    section_id: number
     content: string
     theme: string
 }

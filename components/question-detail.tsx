@@ -13,14 +13,21 @@ import {
     getSectionHrefWithQuery,
 } from '@/lib/href'
 import { getUrlQuery } from '@/lib/url-query'
-import { Question, Video } from '@/types/database/tables'
+import { Video } from '@/types/database/tables'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import BreadcrumbsList from './breadcrumbs-list'
+import QuestionPagination from './pagination/question-pagination'
 import ProgressBar from './progress-bar'
 import QuestionArea from './question-area'
-import QuestionPagination from './question-pagination'
 import YouTubeArea from './youtube-area'
+
+type Question = {
+    content: string
+    id: number
+    section_id: number
+    theme: string
+}
 
 type Videos = {
     video: Video
@@ -189,8 +196,8 @@ export default function QuestionDetail({
     sectionId: number
     isSimilar?: boolean
     videoId?: number
-    nextQuestion?: Question
-    previousQuestion?: Question
+    nextQuestion?: Question | undefined
+    previousQuestion?: Question | undefined
 }) {
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
@@ -293,45 +300,9 @@ export default function QuestionDetail({
                             width={pageWidth}
                         />
                         <QuestionPagination
-                            video={
-                                !isSimilar
-                                    ? (paginateVideos.nextVideo as Video)
-                                    : paginateVideos.video
-                            }
-                            questionId={+questionId}
-                            sectionId={+sectionId}
-                            content={content}
-                            sectionTitle={sectionTitle}
-                            previousId={
-                                getPreviousId({
-                                    isSimilar,
-                                    previousId,
-                                    paginateVideos,
-                                }) as number | undefined
-                            }
-                            nextId={
-                                getNextId({
-                                    isSimilar,
-                                    nextId,
-                                    paginateVideos,
-                                }) as number | undefined
-                            }
-                            previousQuestion={previousQuestion}
+                            title={sectionTitle}
                             nextQuestion={nextQuestion}
-                            startSimilarVideoId={
-                                !isSimilar
-                                    ? (paginateVideos.nextVideo as Video).id
-                                    : startSimilarVideoId
-                            }
-                            endSimilarVideoId={
-                                !isSimilar
-                                    ? paginateVideos.video.id
-                                    : endSimilarVideoId
-                            }
-                            questionTheme={questionTheme}
-                            startQuestionId={startQuestionId}
-                            endQuestionId={endQuestionId}
-                            similar={isSimilar}
+                            previousQuestion={previousQuestion}
                         />
                     </SMainWrapper>
                 </SContainer>
