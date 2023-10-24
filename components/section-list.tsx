@@ -69,7 +69,7 @@ export default function SectionList({
                 <ULi key={id}>
                     <Link
                         onClick={clickHandler}
-                        href={`/section-list/${id}?title=${title}`}>
+                        href={`/section-list/${id}/pages/1?title=${title}`}>
                         {title}
                     </Link>
                 </ULi>

@@ -28,7 +28,7 @@ function SUl({ children }: { children: React.ReactNode }) {
 export default async function SectionDetailPage({
     params,
 }: SectionDetailPageProps) {
-    const { sectionId } = params
+    const { sectionId, pageId } = params
 
     return (
         <SSectionDetailPageWrapper>
@@ -36,7 +36,7 @@ export default async function SectionDetailPage({
             <SUl>
                 <Suspense fallback={<Spinner color="rgb(16,185,129)" />}>
                     {/* @ts-ignore */}
-                    <FetchQuestionList sectionId={+sectionId} />
+                    <FetchQuestionList sectionId={+sectionId} pageId={pageId} />
                 </Suspense>
             </SUl>
             <Link href={`/section-list`}>

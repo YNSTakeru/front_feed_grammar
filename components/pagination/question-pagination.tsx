@@ -46,11 +46,13 @@ const SNav = styled(CustomNav)`
 `
 const CustomLink = ({
     title,
+    pageId,
     question,
     children,
     ...props
 }: {
     title: string
+    pageId: string
     question: Question | undefined
     children: React.ReactNode
 }) => {
@@ -58,7 +60,7 @@ const CustomLink = ({
 
     const { content, id, section_id, theme } = question!
 
-    const href = `/section-list/${section_id}/question/${id}?title=${title}&content=${content}&question-theme=${theme}`
+    const href = `/section-list/${section_id}/pages/${pageId}/questions/${id}?title=${title}&content=${content}&question-theme=${theme}`
 
     return (
         <Link href={href} {...props}>
@@ -71,10 +73,12 @@ const SLink = styled(CustomLink)``
 
 export default function QuestionPagination({
     title,
+    pageId,
     nextQuestion,
     previousQuestion,
 }: {
     title: string
+    pageId: string
     nextQuestion: Question | undefined
     previousQuestion: Question | undefined
 }) {
@@ -83,10 +87,13 @@ export default function QuestionPagination({
     return (
         <ThemeProvider theme={{ ...Theme }}>
             <SNav customRef={navRef}>
-                <SLink title={title} question={previousQuestion}>
+                <SLink
+                    title={title}
+                    pageId={pageId}
+                    question={previousQuestion}>
                     前の問題
                 </SLink>
-                <SLink title={title} question={nextQuestion}>
+                <SLink title={title} pageId={pageId} question={nextQuestion}>
                     次の問題
                 </SLink>
             </SNav>

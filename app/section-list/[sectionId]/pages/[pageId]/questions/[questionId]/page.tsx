@@ -4,7 +4,7 @@ import { QuestionDetailPageProps } from '@/types/pages'
 export default async function QuestionDetailPage({
     params,
 }: QuestionDetailPageProps) {
-    const { questionId, sectionId } = params
+    const { questionId, sectionId, pageId } = params
 
     return (
         <>
@@ -12,6 +12,7 @@ export default async function QuestionDetailPage({
             <FetchQuestionDetail
                 questionId={+questionId}
                 sectionId={+sectionId}
+                pageId={pageId}
             />
         </>
     )

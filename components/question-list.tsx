@@ -1,10 +1,6 @@
 'use client'
 
-import {
-    getQuestionHref,
-    getQuestionHrefWithQuery,
-    getSectionHref,
-} from '@/lib/href'
+import { getQuestionHref, getSectionHref } from '@/lib/href'
 import { getUrlQuery } from '@/lib/url-query'
 import { QuestionCollection } from '@/types/database/tables'
 import Link from 'next/link'
@@ -27,9 +23,11 @@ const SLi = styled.li`
 export default function QuestionList({
     questionListData,
     sectionId,
+    pageId,
 }: {
     questionListData: QuestionCollection
     sectionId: number
+    pageId: string
 }) {
     const sectionTitle = getUrlQuery('title')!
     const sectionHref = getSectionHref({ sectionId })
@@ -63,28 +61,8 @@ export default function QuestionList({
                     ? questionList[i - 1]
                     : null
 
-                const href = getQuestionHrefWithQuery({
-                    questionHref,
-                    sectionTitle,
-                    questionContent: content,
-                    questionTheme: theme,
-                    nextQuestionId: nextQuestion ? nextQuestion.id : null,
-                    previousQuestionId: previousQuestion
-                        ? previousQuestion.id
-                        : null,
-                    nextQuestionContent: nextQuestion
-                        ? nextQuestion.content
-                        : '',
-                    nextQuestionTheme: nextQuestion ? nextQuestion.theme : '',
-                    previousQuestionContent: previousQuestion
-                        ? previousQuestion.content
-                        : '',
-                    previousQuestionTheme: previousQuestion
-                        ? previousQuestion.theme
-                        : '',
-                    startQuestionId: questionList[0].id,
-                    endQuestionId: questionList[questionList.length - 1].id,
-                })
+                const href = `/section-list/${sectionId}/pages/${pageId}/questions/${id}?title=${sectionTitle}&content=${content}&question-theme=${theme}`
+
                 return (
                     <SLi key={id}>
                         <Link href={href}>{content}</Link>

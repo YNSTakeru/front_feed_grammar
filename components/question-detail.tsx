@@ -38,6 +38,7 @@ type Videos = {
 type BreadcrumbsListProps = QuestionHrefQuery & {
     sectionId: number
     questionId: number
+    pageId: string
 }
 
 type VideoProps = {
@@ -101,12 +102,11 @@ function getNormalBreadcrumbsListContents({
     sectionId,
     questionContent,
     sectionTitle,
+    pageId,
 }: BreadcrumbsListProps) {
-    const sectionHref = getSectionHref({ sectionId })
-
     return [
         {
-            href: getSectionHrefWithQuery({ sectionHref, sectionTitle }),
+            href: `/section-list/${sectionId}/pages/${pageId}/?title=${sectionTitle}`,
             content: sectionTitle,
         },
         {
@@ -186,6 +186,7 @@ export default function QuestionDetail({
     videos,
     questionId,
     sectionId,
+    pageId,
     isSimilar,
     videoId,
     previousQuestion,
@@ -194,11 +195,13 @@ export default function QuestionDetail({
     videos: Video[]
     questionId: number
     sectionId: number
+    pageId: string
     isSimilar?: boolean
     videoId?: number
     nextQuestion?: Question | undefined
     previousQuestion?: Question | undefined
 }) {
+    console.log(pageId)
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
 
@@ -209,8 +212,6 @@ export default function QuestionDetail({
     const endQuestionId = +getUrlQuery('end-question-id')!
     const startSimilarVideoId = +getUrlQuery('start-similar-video-id')!
     const endSimilarVideoId = +getUrlQuery('end-similar-video-id')!
-    const previousId = previousQuestion ? previousQuestion.id : null
-    const nextId = nextQuestion ? nextQuestion.id : null
 
     const breadcrumbsListProps: BreadcrumbsListProps = {
         questionContent: content,
@@ -222,6 +223,7 @@ export default function QuestionDetail({
         sectionId,
         sectionTitle,
         questionId,
+        pageId,
     }
 
     const breadcrumbsListContents = getBreadcrumbsListContents({
@@ -240,36 +242,6 @@ export default function QuestionDetail({
         videoId,
         props: videoProps,
     })!
-
-    function getPreviousId({
-        isSimilar,
-        previousId,
-        paginateVideos,
-    }: {
-        isSimilar?: boolean
-        previousId?: number | null
-        paginateVideos: Videos
-    }) {
-        if (isSimilar)
-            return paginateVideos.previousVideo
-                ? paginateVideos.previousVideo.id
-                : null
-        return previousQuestion
-    }
-
-    function getNextId({
-        isSimilar,
-        nextId,
-        paginateVideos,
-    }: {
-        isSimilar?: boolean
-        nextId?: number | null
-        paginateVideos: Videos
-    }) {
-        if (isSimilar)
-            return paginateVideos.nextVideo ? paginateVideos.nextVideo.id : null
-        return nextId
-    }
 
     useEffect(() => {
         const padding = window.innerWidth > 896 ? 15 : 0
@@ -301,6 +273,7 @@ export default function QuestionDetail({
                         />
                         <QuestionPagination
                             title={sectionTitle}
+                            pageId={pageId}
                             nextQuestion={nextQuestion}
                             previousQuestion={previousQuestion}
                         />
