@@ -40,15 +40,17 @@ export default function QuestionList({
         : ''
 
     const prevPageNum = previousLink[previousLink.length - 1]
+        ? previousLink[previousLink.length - 1]
+        : null
     const nextPageNum = nextLink[nextLink.length - 1]
+        ? nextLink[nextLink.length - 1]
+        : null
 
-    // Todo URLにするよりpageを階層にした方がいいかも
-    const sectionListPrevHref = `/section-list/${sectionId}?title=${sectionTitle}&page=${prevPageNum}`
-    const sectionListNextHref = `/section-list/${sectionId}?title=${sectionTitle}&page=${nextPageNum}`
+    const sectionListPrevHref = `/section-list/${sectionId}/pages/${prevPageNum}?title=${sectionTitle}`
+    const sectionListNextHref = `/section-list/${sectionId}/pages/${nextPageNum}?title=${sectionTitle}`
 
     return (
         <>
-            {/* Todo next-content, previous-contentを渡す */}
             {questionList.map(({ id, content, theme }, i) => {
                 const questionHref = getQuestionHref({
                     sectionHref,
@@ -71,10 +73,18 @@ export default function QuestionList({
             })}
             <SUl>
                 <SLi>
-                    <Link href={sectionListPrevHref}>前のページへ</Link>
+                    {prevPageNum ? (
+                        <Link href={sectionListPrevHref}>前のページへ</Link>
+                    ) : (
+                        <></>
+                    )}
                 </SLi>
                 <SLi>
-                    <Link href={sectionListNextHref}>次のページへ</Link>
+                    {nextPageNum ? (
+                        <Link href={sectionListNextHref}>次のページ</Link>
+                    ) : (
+                        <></>
+                    )}
                 </SLi>
             </SUl>
         </>

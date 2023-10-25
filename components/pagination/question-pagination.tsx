@@ -84,6 +84,7 @@ export default function QuestionPagination({
 }) {
     const navRef = useRef<HTMLDivElement>(null!)
 
+    // Todo 問い12の時だけ前の問題が問い1にジャンプする
     return (
         <ThemeProvider theme={{ ...Theme }}>
             <SNav customRef={navRef}>
