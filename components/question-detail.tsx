@@ -201,7 +201,6 @@ export default function QuestionDetail({
     nextQuestion?: Question | undefined
     previousQuestion?: Question | undefined
 }) {
-    console.log(pageId)
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
 

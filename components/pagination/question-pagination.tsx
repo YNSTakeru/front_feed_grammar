@@ -3,7 +3,7 @@
 import Theme from '@/themes/light'
 import Link from 'next/link'
 import { useRef } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider, css } from 'styled-components'
 
 type Question = {
     content: string
@@ -56,7 +56,7 @@ const CustomLink = ({
     question: Question | undefined
     children: React.ReactNode
 }) => {
-    if (!question) return <div>{children}</div>
+    if (!question) return <div {...props}>{children}</div>
 
     const { content, id, section_id, theme } = question!
 
@@ -69,7 +69,17 @@ const CustomLink = ({
     )
 }
 
-const SLink = styled(CustomLink)``
+const SLink = styled(CustomLink)`
+    ${({ question, theme }) => {
+        const { deactiveColor } = theme
+        return question
+            ? css``
+            : css`
+                  cursor: not-allowed;
+                  color: ${deactiveColor};
+              `
+    }}
+`
 
 export default function QuestionPagination({
     title,
@@ -84,7 +94,6 @@ export default function QuestionPagination({
 }) {
     const navRef = useRef<HTMLDivElement>(null!)
 
-    // Todo 問い12の時だけ前の問題が問い1にジャンプする
     return (
         <ThemeProvider theme={{ ...Theme }}>
             <SNav customRef={navRef}>
