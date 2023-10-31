@@ -12,7 +12,7 @@ export default async function FetchSimilarQuestionDetail({
     sectionId: number
     pageId: string
 }) {
-    const videos = await fetchVideos(questionId)
+    const videos = await fetchVideos({ questionId: `${questionId}`, pageId })
 
     return (
         <QuestionDetail

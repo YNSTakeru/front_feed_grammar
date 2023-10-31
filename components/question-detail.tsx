@@ -238,7 +238,7 @@ export default function QuestionDetail({
 
     const paginateVideos = getVideos({
         isSimilar,
-        videoId,
+        videoId: +videos[0].id,
         props: videoProps,
     })!
 

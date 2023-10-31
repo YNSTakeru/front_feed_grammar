@@ -10,7 +10,8 @@ export default async function FetchQuestionDetail({
     questionId: number
     pageId: string
 }) {
-    const videos = await fetchVideos(questionId)
+    // Todo 正しく取得できていない
+    const videos = await fetchVideos({ questionId: `${questionId}`, pageId })
     const { previousQuestion, nextQuestion } = await fetchQuestionLink(
         questionId,
     )

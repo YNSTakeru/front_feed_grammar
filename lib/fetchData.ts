@@ -42,7 +42,13 @@ export async function fetchQuestionLink(questionId: number) {
     return questionLink
 }
 
-export async function fetchVideos(questionId: number) {
+export async function fetchVideos({
+    questionId,
+    pageId = '1',
+}: {
+    questionId: string
+    pageId: string
+}) {
     const res = await fetchISR(
         `${process.env.URL}/api/videos?filter[question_id]=${questionId}`,
     )
