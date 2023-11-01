@@ -1,5 +1,9 @@
-import { Question, Section, Url, Video, Word } from '@/types/database/tables'
-import { getRandomValueFromArray } from './array'
+import {
+    QuestionCollection,
+    QuestionLink,
+    SectionCollection,
+    Video,
+} from '@/types/database/tables'
 
 async function fetchISR(url: string) {
     const res = await fetch(url, { next: { revalidate: 10 } })
@@ -9,137 +13,47 @@ async function fetchISR(url: string) {
     return res
 }
 
-export async function fetchSectionList() {
-    const res = await fetchISR(`${process.env.URL}/api/sections`)
-    const sectionList: Section[] = await res.json()
-    return sectionList
+export async function fetchSectionListData(pageNum = 1) {
+    const res = await fetchISR(
+        `${process.env.URL}/api/sections?page=${pageNum}`,
+    )
+    const sectionListData: SectionCollection = await res.json()
+    return sectionListData
 }
 
-export async function fetchQuestionList(sectionId: number) {
-    const res = await fetchISR(`${process.env.URL}/api/sections/${sectionId}`)
-    const resJson = await res.json()
-
-    const questionList: Question[] = resJson.questions
-    return questionList
-}
-
-export async function fetchNextQuestion({
+export async function fetchQuestionListData({
     sectionId,
-    questionId,
+    pageNum = 1,
 }: {
     sectionId: number
-    questionId: number
+    pageNum?: number
 }) {
     const res = await fetchISR(
-        `${process.env.URL}/sections/${sectionId}/questions/${questionId}/next`,
+        `${process.env.URL}/api/sections/${sectionId}/questions?page=${pageNum}`,
     )
+    const questionListData: QuestionCollection = await res.json()
 
-    const resJson = await res.json()
-
-    const question: Question = resJson.question
-    return question
+    return questionListData
 }
 
-export async function fetchPreviousQuestion({
-    sectionId,
+export async function fetchQuestionLink(questionId: number) {
+    const res = await fetchISR(`${process.env.URL}/api/questions/${questionId}`)
+    const questionLink: QuestionLink = await res.json()
+    return questionLink
+}
+
+export async function fetchVideos({
     questionId,
+    pageId = '1',
 }: {
-    sectionId: number
-    questionId: number
+    questionId: string
+    pageId: string
 }) {
     const res = await fetchISR(
-        `${process.env.URL}/sections/${sectionId}/questions/${questionId}/previous`,
+        `${process.env.URL}/api/videos?filter[question_id]=${questionId}`,
     )
 
-    const resJson = await res.json()
+    const videos: Video[] = (await res.json()).data
 
-    const question: Question = resJson.question
-    return question
-}
-
-export async function fetchQuestionDetail(questionId: number) {
-    const urls = await fetchUrls(questionId)
-    const { url, id } = getRandomValueFromArray(urls)
-    const urlId = id
-    const video = await fetchVideo(urlId)
-    const videoId = video.id
-    const words = await fetchWords(videoId)
-
-    return { video, url, words }
-}
-
-async function fetchUrls(questionId: number) {
-    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
-
-    const resJson = await res.json()
-
-    const urls: Url[] = resJson.urls
-
-    return urls
-}
-
-export async function fetchVideos(questionId: number) {
-    const res = await fetchISR(`${process.env.URL}/questions/${questionId}`)
-
-    const resJson = await res.json()
-
-    const video: Video[] = resJson.videos
-
-    return video
-}
-
-async function fetchVideo(urlId: number) {
-    const res = await fetchISR(`${process.env.URL}/urls/${urlId}`)
-
-    const resJson = await res.json()
-
-    const video: Video = resJson.video
-
-    return video
-}
-
-export async function fetchNextVideo({
-    questionId,
-    videoId,
-}: {
-    questionId: number
-    videoId: number
-}) {
-    const res = await fetchISR(
-        `${process.env.URL}/questions/${questionId}/videos/${videoId}/next`,
-    )
-
-    const resJson = await res.json()
-
-    const video: Video = resJson.video
-
-    return video
-}
-
-export async function fetchPreviousVideo({
-    questionId,
-    videoId,
-}: {
-    questionId: number
-    videoId: number
-}) {
-    const res = await fetchISR(
-        `${process.env.URL}/questions/${questionId}/videos/${videoId}/previous`,
-    )
-
-    const resJson = await res.json()
-
-    const video: Video = resJson.video
-
-    return video
-}
-
-async function fetchWords(videoId: number) {
-    const res = await fetchISR(`${process.env.URL}/words/${videoId}`)
-
-    const resJson = await res.json()
-
-    const words: Word[] = resJson.words
-
-    return words
+    return videos
 }

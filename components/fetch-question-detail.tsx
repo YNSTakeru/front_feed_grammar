@@ -1,31 +1,29 @@
-import {
-    fetchNextQuestion,
-    fetchPreviousQuestion,
-    fetchVideos,
-} from '@/lib/fetchData'
+import { fetchQuestionLink, fetchVideos } from '@/lib/fetchData'
 import QuestionDetail from './question-detail'
 
 export default async function FetchQuestionDetail({
-    questionId,
     sectionId,
+    questionId,
+    pageId,
 }: {
-    questionId: number
     sectionId: number
+    questionId: number
+    pageId: string
 }) {
-    const videos = await fetchVideos(questionId)
-    const nextQuestion = await fetchNextQuestion({ sectionId, questionId })
-    const previousQuestion = await fetchPreviousQuestion({
-        sectionId,
+    // Todo 正しく取得できていない
+    const videos = await fetchVideos({ questionId: `${questionId}`, pageId })
+    const { previousQuestion, nextQuestion } = await fetchQuestionLink(
         questionId,
-    })
+    )
 
     return (
         <QuestionDetail
             videos={videos}
             questionId={questionId}
             sectionId={sectionId}
-            nextData={nextQuestion}
-            previousData={previousQuestion}
+            pageId={pageId}
+            nextQuestion={nextQuestion}
+            previousQuestion={previousQuestion}
         />
     )
 }

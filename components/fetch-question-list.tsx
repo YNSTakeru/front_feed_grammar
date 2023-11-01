@@ -1,12 +1,23 @@
-import { fetchQuestionList } from '@/lib/fetchData'
+import { fetchQuestionListData } from '@/lib/fetchData'
 import QuestionList from './question-list'
 
 export default async function FetchQuestionList({
     sectionId,
+    pageId,
 }: {
     sectionId: number
+    pageId: string
 }) {
-    const questionList = await fetchQuestionList(sectionId)
+    const questionListData = await fetchQuestionListData({
+        sectionId,
+        pageNum: +pageId,
+    })
 
-    return <QuestionList questionList={questionList} sectionId={sectionId} />
+    return (
+        <QuestionList
+            questionListData={questionListData}
+            sectionId={sectionId}
+            pageId={pageId}
+        />
+    )
 }

@@ -5,6 +5,12 @@ type SectionHrefQuery = {
 export type QuestionHrefQuery = SectionHrefQuery & {
     questionContent: string
     questionTheme: string
+    nextQuestionId?: number | null
+    previousQuestionId?: number | null
+    nextQuestionContent?: string | null
+    nextQuestionTheme?: string | null
+    previousQuestionContent?: string | null
+    previousQuestionTheme?: string | null
     startQuestionId: number
     endQuestionId: number
     startSimilarVideoId?: number
@@ -40,6 +46,12 @@ function getQuestionQuery({
     sectionTitle,
     questionContent,
     questionTheme,
+    nextQuestionContent,
+    nextQuestionTheme,
+    previousQuestionContent,
+    previousQuestionTheme,
+    nextQuestionId,
+    previousQuestionId,
     startQuestionId,
     endQuestionId,
     startSimilarVideoId,
@@ -47,7 +59,7 @@ function getQuestionQuery({
 }: QuestionHrefQuery) {
     return `${getSectionQuery({
         sectionTitle,
-    })}&content=${questionContent}&question-theme=${questionTheme}&start-question-id=${startQuestionId}&end-question-id=${endQuestionId}&start-similar-video-id=${startSimilarVideoId}&end-similar-video-id=${endSimilarVideoId}`
+    })}&content=${questionContent}&question-theme=${questionTheme}&start-question-id=${startQuestionId}&end-question-id=${endQuestionId}&start-similar-video-id=${startSimilarVideoId}&end-similar-video-id=${endSimilarVideoId}&next-question-id=${nextQuestionId}&previous-question-id=${previousQuestionId}&next-question-content=${nextQuestionContent}&next-question-theme=${nextQuestionTheme}&previous-question-content=${previousQuestionContent}&previous-question-theme=${previousQuestionTheme}`
 }
 
 export function getQuestionHrefWithQuery({
@@ -55,6 +67,12 @@ export function getQuestionHrefWithQuery({
     sectionTitle,
     questionContent,
     questionTheme,
+    nextQuestionContent,
+    nextQuestionTheme,
+    previousQuestionContent,
+    previousQuestionTheme,
+    nextQuestionId,
+    previousQuestionId,
     startQuestionId,
     endQuestionId,
     startSimilarVideoId,
@@ -64,6 +82,12 @@ export function getQuestionHrefWithQuery({
         sectionTitle,
         questionContent,
         questionTheme,
+        nextQuestionContent,
+        nextQuestionTheme,
+        previousQuestionContent,
+        previousQuestionTheme,
+        nextQuestionId,
+        previousQuestionId,
         startQuestionId,
         endQuestionId,
         startSimilarVideoId,

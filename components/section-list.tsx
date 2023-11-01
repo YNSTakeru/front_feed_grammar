@@ -1,7 +1,6 @@
 'use client'
 
 import useStore from '@/store'
-import { Section } from '@/types/database/tables'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
@@ -45,7 +44,12 @@ export default function SectionList({
     sectionList,
     clickHandler,
 }: {
-    sectionList: Section[]
+    sectionList: {
+        id: number
+        title: string
+        created_at: string
+        updated_at: string
+    }[]
     clickHandler?: () => void
 }) {
     let storeSectionList = useStore.getState().sectionList
@@ -65,7 +69,7 @@ export default function SectionList({
                 <ULi key={id}>
                     <Link
                         onClick={clickHandler}
-                        href={`/section-list/${id}?title=${title}`}>
+                        href={`/section-list/${id}/pages/1?title=${title}`}>
                         {title}
                     </Link>
                 </ULi>

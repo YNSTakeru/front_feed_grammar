@@ -103,7 +103,7 @@ function getCustomHref({
     videoId,
     isNext,
     isPrev,
-    prevId,
+    previousId,
     nextId,
     hrefProps,
 }: {
@@ -111,7 +111,7 @@ function getCustomHref({
     videoId?: number
     isNext?: boolean
     isPrev?: boolean
-    prevId?: number
+    previousId?: number
     nextId?: number
     hrefProps: QuestionHrefProps | VideoHrefProps
 }) {
@@ -123,8 +123,8 @@ function getCustomHref({
     }
     const { startSimilarVideoId, endSimilarVideoId } = hrefProps
 
-    if (isPrev && prevId && prevId != endSimilarVideoId) {
-        return getVideoHrefWithQUery({ videoId: prevId, ...hrefProps })
+    if (isPrev && previousId && previousId != endSimilarVideoId) {
+        return getVideoHrefWithQUery({ videoId: previousId, ...hrefProps })
     }
     if (isNext && nextId && nextId != startSimilarVideoId) {
         return getVideoHrefWithQUery({ videoId: nextId, ...hrefProps })
@@ -139,8 +139,10 @@ const CustomLink = ({
     isSolved,
     isNext,
     isPrev,
-    prev,
-    next,
+    previousId,
+    nextId,
+    previousQuestion,
+    nextQuestion,
     queryProps,
     children,
     ...props
@@ -150,8 +152,10 @@ const CustomLink = ({
     isSolved?: boolean
     isNext?: boolean
     isPrev?: boolean
-    prev?: Question | Video
-    next?: Question | Video
+    previousId?: number
+    nextId?: number
+    previousQuestion?: Question
+    nextQuestion?: Question
     queryProps: QueryProps
     children: React.ReactNode
 }) => {
@@ -166,17 +170,28 @@ const CustomLink = ({
         startSimilarVideoId,
         endSimilarVideoId,
     } = queryProps
-
     const sectionHref = getSectionHref({ sectionId })
+
+    function getQuestionId({
+        similar,
+        previousId,
+        nextId,
+        questionId,
+    }: {
+        similar?: boolean
+        previousId?: number
+        nextId?: number
+        questionId: number
+    }) {
+        if (similar) return questionId
+        if (previousId) return previousId
+        if (nextId) return nextId
+        return questionId
+    }
+
     const questionHref = getQuestionHref({
         sectionHref,
-        questionId: similar
-            ? questionId
-            : prev
-            ? prev.id
-            : next
-            ? next.id
-            : questionId,
+        questionId: getQuestionId({ similar, previousId, nextId, questionId }),
     })
 
     const hrefProps = {
@@ -195,8 +210,8 @@ const CustomLink = ({
         videoId,
         isNext,
         isPrev,
-        prevId: prev ? prev.id : undefined,
-        nextId: next ? next.id : undefined,
+        previousId,
+        nextId,
         hrefProps,
     })
 
@@ -245,7 +260,15 @@ const CustomLink = ({
 }
 
 const SLink = styled(CustomLink)`
-    ${({ videoId, queryProps, isPrev, isNext, similar, prev, next }) => {
+    ${({
+        videoId,
+        queryProps,
+        isPrev,
+        isNext,
+        similar,
+        previousId,
+        nextId,
+    }) => {
         const { startQuestionId, endQuestionId, questionId } = queryProps
         if (!similar && videoId) {
             return css`
@@ -269,14 +292,14 @@ const SLink = styled(CustomLink)`
             `
         }
 
-        if (isPrev && !prev) {
+        if (isPrev && !previousId) {
             return css`
                 cursor: not-allowed;
                 transition: color 0.3s;
             `
         }
 
-        if (isNext && !next) {
+        if (isNext && !nextId) {
             return css`
                 cursor: not-allowed;
                 transition: color 0.3s;
@@ -303,8 +326,8 @@ const SLink = styled(CustomLink)`
         theme,
         isPrev,
         isNext,
-        prev,
-        next,
+        previousId,
+        nextId,
         similar,
     }) => {
         const { startQuestionId, endQuestionId, questionId } = queryProps
@@ -326,10 +349,10 @@ const SLink = styled(CustomLink)`
         ) {
             return deactiveColor
         }
-        if (isPrev && !prev) {
+        if (isPrev && !previousId) {
             return deactiveColor
         }
-        if (isNext && !next) {
+        if (isNext && !nextId) {
             return deactiveColor
         }
     }};
@@ -341,8 +364,8 @@ const SLink = styled(CustomLink)`
             theme,
             isPrev,
             isNext,
-            prev,
-            next,
+            previousId,
+            nextId,
             similar,
         }) => {
             const { startQuestionId, endQuestionId, questionId } = queryProps
@@ -364,10 +387,10 @@ const SLink = styled(CustomLink)`
                 return deactiveColor
             }
 
-            if (isPrev && !prev) {
+            if (isPrev && !previousId) {
                 return deactiveColor
             }
-            if (isNext && !next) {
+            if (isNext && !nextId) {
                 return deactiveColor
             }
 
@@ -425,8 +448,10 @@ export default function QuestionPagination({
     sectionId,
     content,
     sectionTitle,
-    prev,
-    next,
+    previousId,
+    nextId,
+    nextQuestion,
+    previousQuestion,
     startSimilarVideoId,
     endSimilarVideoId,
     questionTheme,
@@ -439,8 +464,10 @@ export default function QuestionPagination({
     sectionId: number
     content: string
     sectionTitle: string
-    prev?: Question | Video | undefined
-    next?: Question | Video | undefined
+    previousId?: number
+    nextId?: number
+    nextQuestion?: Question
+    previousQuestion?: Question
     startSimilarVideoId: number
     endSimilarVideoId: number
     questionTheme: string
@@ -484,7 +511,7 @@ export default function QuestionPagination({
             <SNav customRef={navRef}>
                 <SLink
                     queryProps={queryProps}
-                    prev={prev}
+                    previousId={previousId}
                     isPrev
                     similar={similar}>
                     前の問題へ
@@ -501,7 +528,7 @@ export default function QuestionPagination({
                 </SLink>
                 <SLink
                     queryProps={queryProps}
-                    next={next}
+                    nextId={nextId}
                     isNext
                     similar={similar}>
                     次の問題へ

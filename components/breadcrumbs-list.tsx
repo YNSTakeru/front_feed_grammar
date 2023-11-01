@@ -1,7 +1,6 @@
 'use client'
 
 import Theme from '@/themes/light'
-import { BreadcrumbsListProps } from '@/types/question-detail'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ThemeProvider, styled } from 'styled-components'
@@ -83,7 +82,7 @@ export default function BreadcrumbsList({
     contents,
     width,
 }: {
-    contents: BreadcrumbsListProps[]
+    contents: any[]
     width: number
 }) {
     const [stateWidth, setWidth] = useState(width)

@@ -13,18 +13,32 @@ import {
     getSectionHrefWithQuery,
 } from '@/lib/href'
 import { getUrlQuery } from '@/lib/url-query'
-import { Question, Video } from '@/types/database/tables'
+import { Video } from '@/types/database/tables'
 import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import BreadcrumbsList from './breadcrumbs-list'
+import QuestionPagination from './pagination/question-pagination'
 import ProgressBar from './progress-bar'
 import QuestionArea from './question-area'
-import QuestionPagination from './question-pagination'
 import YouTubeArea from './youtube-area'
+
+type Question = {
+    content: string
+    id: number
+    section_id: number
+    theme: string
+}
+
+type Videos = {
+    video: Video
+    previousVideo?: Video | null
+    nextVideo?: Video | null
+}
 
 type BreadcrumbsListProps = QuestionHrefQuery & {
     sectionId: number
     questionId: number
+    pageId: string
 }
 
 type VideoProps = {
@@ -41,11 +55,11 @@ function getVideos({
     isSimilar?: boolean
     videoId?: number
     props: VideoProps
-}) {
+}): Videos {
     const { videos, startSimilarVideoId, endSimilarVideoId } = props
 
     if (isSimilar) {
-        const video = videos.filter(({ id }) => id == videoId)[0]
+        const video = videos.filter(({ id }) => id == videoId)[0]!
 
         let nextVideo = (getNextArrayValue({
             arry: videos,
@@ -68,9 +82,9 @@ function getVideos({
     const nextVideo = (getNextArrayValue({
         arry: videos,
         id: video.id,
-    }) as unknown) as Video
+    }) as unknown) as Video | null
 
-    return { video, nextVideo }
+    return { video, nextVideo, previousVideo: null }
 }
 function getBreadcrumbsListContents({
     isSimilar,
@@ -88,12 +102,11 @@ function getNormalBreadcrumbsListContents({
     sectionId,
     questionContent,
     sectionTitle,
+    pageId,
 }: BreadcrumbsListProps) {
-    const sectionHref = getSectionHref({ sectionId })
-
     return [
         {
-            href: getSectionHrefWithQuery({ sectionHref, sectionTitle }),
+            href: `/section-list/${sectionId}/pages/${pageId}/?title=${sectionTitle}`,
             content: sectionTitle,
         },
         {
@@ -173,18 +186,20 @@ export default function QuestionDetail({
     videos,
     questionId,
     sectionId,
-    nextData,
-    previousData,
+    pageId,
     isSimilar,
     videoId,
+    previousQuestion,
+    nextQuestion,
 }: {
     videos: Video[]
     questionId: number
     sectionId: number
-    nextData?: Question | Video
-    previousData?: Question | Video
+    pageId: string
     isSimilar?: boolean
     videoId?: number
+    nextQuestion?: Question | undefined
+    previousQuestion?: Question | undefined
 }) {
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
@@ -207,6 +222,7 @@ export default function QuestionDetail({
         sectionId,
         sectionTitle,
         questionId,
+        pageId,
     }
 
     const breadcrumbsListContents = getBreadcrumbsListContents({
@@ -222,7 +238,7 @@ export default function QuestionDetail({
 
     const paginateVideos = getVideos({
         isSimilar,
-        videoId,
+        videoId: +videos[0].id,
         props: videoProps,
     })!
 
@@ -255,43 +271,10 @@ export default function QuestionDetail({
                             width={pageWidth}
                         />
                         <QuestionPagination
-                            video={
-                                !isSimilar
-                                    ? (paginateVideos.nextVideo as Video)
-                                    : paginateVideos.video
-                            }
-                            questionId={+questionId}
-                            sectionId={+sectionId}
-                            content={content}
-                            sectionTitle={sectionTitle}
-                            prev={
-                                previousData
-                                    ? previousData
-                                    : paginateVideos.previousVideo
-                                    ? (paginateVideos.previousVideo as Video)
-                                    : undefined
-                            }
-                            next={
-                                nextData
-                                    ? nextData
-                                    : paginateVideos.nextVideo
-                                    ? (paginateVideos.nextVideo as Video)
-                                    : undefined
-                            }
-                            startSimilarVideoId={
-                                !isSimilar
-                                    ? (paginateVideos.nextVideo as Video).id
-                                    : startSimilarVideoId
-                            }
-                            endSimilarVideoId={
-                                !isSimilar
-                                    ? paginateVideos.video.id
-                                    : endSimilarVideoId
-                            }
-                            questionTheme={questionTheme}
-                            startQuestionId={startQuestionId}
-                            endQuestionId={endQuestionId}
-                            similar={isSimilar}
+                            title={sectionTitle}
+                            pageId={pageId}
+                            nextQuestion={nextQuestion}
+                            previousQuestion={previousQuestion}
                         />
                     </SMainWrapper>
                 </SContainer>

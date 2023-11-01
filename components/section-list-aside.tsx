@@ -2,7 +2,7 @@
 'use client'
 import { getWindowSize } from '@/hooks/get-window.size'
 import Theme from '@/themes/light'
-import { Section } from '@/types/database/tables'
+import { SectionCollection } from '@/types/database/tables'
 import { useState } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import SectionList from './section-list'
@@ -85,15 +85,16 @@ function SUl({ children }: { children: React.ReactNode }) {
 }
 
 export default function SectionListAside({
-    sectionList,
+    sectionListData,
 }: {
-    sectionList: Section[]
+    sectionListData: SectionCollection
 }) {
     const { width } = getWindowSize()
     const [isOpen, setIsOpen] = useState(false)
     const clickHandler = () => {
         setIsOpen(prev => !prev)
     }
+    const sectionList = sectionListData.data
 
     if (!width) return <Spinner></Spinner>
 

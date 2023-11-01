@@ -1,6 +1,7 @@
 export type SectionDetailPageProps = {
     params: {
         sectionId: string
+        pageId: string
     }
 }
 
@@ -8,6 +9,7 @@ export type QuestionDetailPageProps = {
     params: {
         questionId: string
         sectionId: string
+        pageId: string
     }
 }
 
