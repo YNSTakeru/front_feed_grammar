@@ -145,19 +145,19 @@ const SLi = styled(CustomLi)`
 `
 
 function splitAnswer(answer: string) {
-    const pattern = /[\w\s\’\'\,\"]*[\.]{0,3}[\w\s\’\'\,]*/
+    const pattern = /[\w\s\’\'\,\"\-]*[\.]{0,3}[\w\s\’\'\,¥-]*/
     const space = /\s/
     const matches = answer.match(pattern)![0].trim()
     const words = matches.split(space).map(word => {
-        const pattern = /[\w\’\']+/
-        return word
+        const pattern = /[\w\’\'\-]+/
+        return word.match(pattern)![0]
     })
 
     return convertLowerCaseWords(words)
 }
 
 function splitDisplayAnswer(answer: string) {
-    const pattern = /[\w\s\.\,\?\!\"\'\’\']*/
+    const pattern = /[\w\s\.\,\?\!\"\'\’\'\-]*/
     const space = /\s/
     const matches = answer.match(pattern)![0]
     return matches.split(space)
@@ -172,7 +172,9 @@ function checkAnInitialLetter(word: string) {
         word == 'John' ||
         word == 'Wesley' ||
         word == 'Arthur' ||
-        word == 'Miller'
+        word == 'Miller' ||
+        word == 'Gospel' ||
+        word == 'Saint'
     )
 }
 
