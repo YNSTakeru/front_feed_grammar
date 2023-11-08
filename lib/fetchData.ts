@@ -15,7 +15,7 @@ async function fetchISR(url: string) {
 
 export async function fetchSectionListData(pageNum = 1) {
     const res = await fetchISR(
-        `${process.env.URL}/api/sections?page=${pageNum}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/sections?page=${pageNum}`,
     )
     const sectionListData: SectionCollection = await res.json()
     return sectionListData
@@ -29,7 +29,7 @@ export async function fetchQuestionListData({
     pageNum?: number
 }) {
     const res = await fetchISR(
-        `${process.env.URL}/api/sections/${sectionId}/questions?page=${pageNum}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/sections/${sectionId}/questions?page=${pageNum}`,
     )
     const questionListData: QuestionCollection = await res.json()
 
@@ -37,7 +37,9 @@ export async function fetchQuestionListData({
 }
 
 export async function fetchQuestionLink(questionId: number) {
-    const res = await fetchISR(`${process.env.URL}/api/questions/${questionId}`)
+    const res = await fetchISR(
+        `${process.env.NEXT_PUBLIC_URL}/api/questions/${questionId}`,
+    )
     const questionLink: QuestionLink = await res.json()
     return questionLink
 }
@@ -50,7 +52,7 @@ export async function fetchVideos({
     pageId: string
 }) {
     const res = await fetchISR(
-        `${process.env.URL}/api/videos?filter[question_id]=${questionId}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/videos?filter[question_id]=${questionId}`,
     )
 
     const videos: Video[] = (await res.json()).data
