@@ -174,7 +174,8 @@ function checkAnInitialLetter(word: string) {
         word == 'Arthur' ||
         word == 'Miller' ||
         word == 'Gospel' ||
-        word == 'Saint'
+        word == 'Saint' ||
+        word == 'Tom'
     )
 }
 
