@@ -1,9 +1,11 @@
-import GlobalStyle from '@/components/global-style'
-import Header from '@/components/header'
-import StyledComponentsRegistry from '@/lib/styled-components/registry'
+/* eslint-disable */
 
-const siteName = 'Feed Grammar'
-const description = '英文法を勉強するサイトです'
+import GlobalStyle from "@/components/global-style"
+import Header from "@/components/header"
+import StyledComponentsRegistry from "@/lib/styled-components/registry"
+
+const siteName = "Feed Grammar"
+const description = "英文法を勉強するサイトです"
 
 export const metadata = {
     title: {

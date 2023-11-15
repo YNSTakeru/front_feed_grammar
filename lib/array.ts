@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export function getRandomValueFromArray<T extends {}>(arry: T[]) {
     const max = arry.length
     const chosenNumber = Math.floor(Math.random() * max)

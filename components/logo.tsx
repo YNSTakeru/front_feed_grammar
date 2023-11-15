@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
+import styled, { css, keyframes } from "styled-components"
 
 const SLogoWrapper = styled.div`
     --bg-gray-700: rgba(55, 65, 81, 1);
@@ -72,8 +74,8 @@ const SLogo = styled(CustomImage)`
 `
 
 export function Logo({
-    src = '/logo.svg',
-    title = 'Feed Grammar (β)',
+    src = "/logo.svg",
+    title = "Feed Grammar (β)",
 }: {
     src?: string
     title?: string

@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
-import styled, { css } from 'styled-components'
+"use client"
+
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useState } from "react"
+import styled, { css } from "styled-components"
 
 const CustomMobileMenuItem = ({
     children,
@@ -19,7 +21,7 @@ const SMobileMenuItem = styled(CustomMobileMenuItem)`
     transition: transform 0.3s, opacity 0.2s ease-in-out;
 
     ${({ isMenuOpen }) => {
-        let styles = ''
+        let styles = ""
         for (let i = 1; i < 3; i++) {
             styles += `
                 &:nth-child(${i}) {
@@ -79,7 +81,7 @@ const SCover = styled(CustomCover)`
     z-index: 9;
     transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
     transform: ${({ isMenuOpen }) =>
-        isMenuOpen ? 'translateY(100vh)' : 'none'};
+        isMenuOpen ? "translateY(100vh)" : "none"};
 `
 
 const MobileMenuIcon = styled(CustomMobileMenuIcon)`
@@ -92,7 +94,7 @@ const MobileMenuIcon = styled(CustomMobileMenuIcon)`
     & > span {
         background-color: black;
         background-color: ${({ isMenuOpen }) =>
-            isMenuOpen ? 'white' : 'black'};
+            isMenuOpen ? "white" : "black"};
         width: 35px;
         height: 2px;
         display: block;
@@ -101,21 +103,21 @@ const MobileMenuIcon = styled(CustomMobileMenuIcon)`
 
         &:nth-child(1) {
             transition-delay: ${({ isMenuOpen }) =>
-                isMenuOpen ? '70ms' : 'none'};
+                isMenuOpen ? "70ms" : "none"};
             transform: ${({ isMenuOpen }) =>
-                isMenuOpen ? 'translateY(11px) rotate(135deg)' : 'none'};
+                isMenuOpen ? "translateY(11px) rotate(135deg)" : "none"};
         }
         &:nth-child(2) {
             transition-delay: ${({ isMenuOpen }) =>
-                isMenuOpen ? '0s' : 'none'};
+                isMenuOpen ? "0s" : "none"};
             transform: ${({ isMenuOpen }) =>
-                isMenuOpen ? 'translateX(-18px) scaleX(0)' : 'none'};
+                isMenuOpen ? "translateX(-18px) scaleX(0)" : "none"};
         }
         &:nth-child(3) {
             transition-delay: ${({ isMenuOpen }) =>
-                isMenuOpen ? '140ms' : 'none'};
+                isMenuOpen ? "140ms" : "none"};
             transform: ${({ isMenuOpen }) =>
-                isMenuOpen ? 'translateY(-11px) rotate(-135deg)' : 'none'};
+                isMenuOpen ? "translateY(-11px) rotate(-135deg)" : "none"};
         }
 
         &:last-child {
@@ -155,7 +157,7 @@ const SMenu = styled(CustomMenu)`
     padding-top: 60px;
     z-index: 10;
     transform: ${({ isMenuOpen }) =>
-        isMenuOpen ? 'translateX(-60%)' : 'none'};
+        isMenuOpen ? "translateX(-60%)" : "none"};
 
     background-color: rgba(0, 0, 0, 0.7);
     transition: transform 0.3s ease-in-out;
@@ -190,9 +192,9 @@ const CustomLink = ({
 
 const SLink = styled(CustomLink)`
     border-radius: 9999999;
-    font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
+    font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
     color: ${({ theme, isMobileMenu }) =>
-        isMobileMenu ? 'white' : theme.bodyFontColor};
+        isMobileMenu ? "white" : theme.bodyFontColor};
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
@@ -227,7 +229,7 @@ export default function NavBar() {
                 <SMobileMenuItem isMenuOpen={isMenuOpen}>
                     <SLink
                         isMobileMenu
-                        isActive={pathname === 'section-list'}
+                        isActive={pathname === "section-list"}
                         href="/section-list">
                         単元一覧
                     </SLink>
@@ -235,7 +237,7 @@ export default function NavBar() {
                 <SMobileMenuItem isMenuOpen={isMenuOpen}>
                     <SLink
                         isMobileMenu
-                        isActive={pathname === 'contact'}
+                        isActive={pathname === "contact"}
                         href="/contact">
                         お問い合わせ
                     </SLink>
@@ -244,11 +246,11 @@ export default function NavBar() {
             <SCover isMenuOpen={isMenuOpen} onClick={clickHandler} />
             <SNav>
                 <SLink
-                    isActive={pathname === 'section-list'}
+                    isActive={pathname === "section-list"}
                     href="/section-list">
                     単元一覧
                 </SLink>
-                <SLink isActive={pathname === 'contact'} href="/contact">
+                <SLink isActive={pathname === "contact"} href="/contact">
                     お問い合わせ
                 </SLink>
             </SNav>

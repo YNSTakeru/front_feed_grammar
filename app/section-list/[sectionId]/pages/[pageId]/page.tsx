@@ -1,11 +1,13 @@
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/solid'
+/* eslint-disable */
 
-import FetchQuestionList from '@/components/fetch-question-list'
-import SectionDetailTitle from '@/components/section-detail/section-title'
-import Spinner from '@/components/spinner'
-import { SectionDetailPageProps } from '@/types/pages'
-import Link from 'next/link'
-import { Suspense } from 'react'
+import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid"
+
+import FetchQuestionList from "@/components/fetch-question-list"
+import SectionDetailTitle from "@/components/section-detail/section-title"
+import Spinner from "@/components/spinner"
+import { SectionDetailPageProps } from "@/types/pages"
+import Link from "next/link"
+import { Suspense } from "react"
 
 function SSectionDetailPageWrapper({
     children,

@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import Theme from '@/themes/light'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { ThemeProvider, styled } from 'styled-components'
+"use client"
+
+import Theme from "@/themes/light"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { ThemeProvider, styled } from "styled-components"
 
 const CustomNav = ({
     width,
@@ -37,7 +39,7 @@ const CustomLi = ({
     className?: string
     children: React.ReactNode
 }) => {
-    return <li className={className + ' breadcrumb__item'}>{children}</li>
+    return <li className={className + " breadcrumb__item"}>{children}</li>
 }
 
 const CustomLink = ({
@@ -70,7 +72,7 @@ const SLi = styled(CustomLi)`
         padding-left: 0.5rem;
 
         &::before {
-            content: ' > ';
+            content: " > ";
             display: inline-block;
             padding-right: 0.5rem;
             color: #6c757d;

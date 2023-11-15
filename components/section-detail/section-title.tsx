@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { getUrlQuery } from '@/lib/url-query'
-import { styled } from 'styled-components'
+import { getUrlQuery } from "@/lib/url-query"
+import { styled } from "styled-components"
 
 const SParagraph = styled.h2`
     display: flex;
@@ -10,7 +10,7 @@ const SParagraph = styled.h2`
 `
 
 export default function SectionDetailTitle() {
-    const title = getUrlQuery('title')
+    const title = getUrlQuery("title")
 
     return <SParagraph>{title}</SParagraph>
 }

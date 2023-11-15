@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Theme from '@/themes/light'
-import { ThemeProvider, styled } from 'styled-components'
-import { Logo } from './logo'
-import NavBar from './nav-bar'
+import Theme from "@/themes/light"
+import { ThemeProvider, styled } from "styled-components"
+import { Logo } from "./logo"
+import NavBar from "./nav-bar"
 
 const SHeader = styled.header`
     height: ${({ theme }) => theme.headerHeight};

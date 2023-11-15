@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import { shuffle } from '@/lib/array'
-import { saveIsSolvedStore, useIsLoadedStore, useIsSolvedStore } from '@/store'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { css, styled } from 'styled-components'
+"use client"
+
+import { shuffle } from "@/lib/array"
+import { saveIsSolvedStore, useIsLoadedStore, useIsSolvedStore } from "@/store"
+import React, { useEffect, useMemo, useRef, useState } from "react"
+import { css, styled } from "styled-components"
 
 const CustomDiv = ({
     className,
@@ -41,7 +43,7 @@ const SUl = styled(CustomUl)`
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 20px;
-    cursor: ${({ isLoaded }) => (isLoaded ? 'cursor' : 'wait')};
+    cursor: ${({ isLoaded }) => (isLoaded ? "cursor" : "wait")};
     max-width: 100%;
 
     @media (min-width: 768px) {
@@ -165,17 +167,17 @@ function splitDisplayAnswer(answer: string) {
 
 function checkAnInitialLetter(word: string) {
     return (
-        word == 'I' ||
-        word == 'Canada' ||
-        word == 'Adobe' ||
-        word == 'Japan' ||
-        word == 'John' ||
-        word == 'Wesley' ||
-        word == 'Arthur' ||
-        word == 'Miller' ||
-        word == 'Gospel' ||
-        word == 'Saint' ||
-        word == 'Tom'
+        word == "I" ||
+        word == "Canada" ||
+        word == "Adobe" ||
+        word == "Japan" ||
+        word == "John" ||
+        word == "Wesley" ||
+        word == "Arthur" ||
+        word == "Miller" ||
+        word == "Gospel" ||
+        word == "Saint" ||
+        word == "Tom"
     )
 }
 
@@ -265,12 +267,12 @@ export default function QuestionArea({
         if (correctOrderWords.length - 1 == checkIdx) {
             solvedHandler(word)
         } else {
-            answerRef.current.textContent += word + ' '
+            answerRef.current.textContent += word + " "
         }
     }
 
     function resetHandler() {
-        answerRef.current.textContent = ''
+        answerRef.current.textContent = ""
         setCheckIdx(prev => 0)
         setIsSolved(prev => false)
         setIsPressedList(prev =>

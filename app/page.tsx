@@ -1,11 +1,13 @@
-'use client'
+/* eslint-disable */
 
-import { getWindowSize } from '@/hooks/get-window.size'
-import Theme from '@/themes/light'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { ThemeProvider, styled } from 'styled-components'
+"use client"
+
+import { getWindowSize } from "@/hooks/get-window.size"
+import Theme from "@/themes/light"
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { ThemeProvider, styled } from "styled-components"
 
 const CustomMainWrapper = ({
     children,
@@ -69,9 +71,9 @@ const CustomImage = ({
     return (
         <div
             style={{
-                position: 'relative',
-                width: `${isMobile ? '7em' : '10vw'}`,
-                height: `${isMobile ? '7em' : '10vw'}`,
+                position: "relative",
+                width: `${isMobile ? "7em" : "10vw"}`,
+                height: `${isMobile ? "7em" : "10vw"}`,
             }}>
             <Image src={src} fill {...props} />
         </div>
@@ -102,7 +104,7 @@ const CustomButton = ({
 }: {
     children: React.ReactNode
 }) => (
-    <Link href={'section-list'} {...props}>
+    <Link href={"section-list"} {...props}>
         <span className="hovering">Let's play</span>
         <span className="default">プレイする</span>
     </Link>

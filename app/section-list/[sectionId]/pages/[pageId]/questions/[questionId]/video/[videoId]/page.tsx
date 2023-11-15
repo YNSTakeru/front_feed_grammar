@@ -1,5 +1,7 @@
-import FetchSimilarQuestionDetail from '@/components/fetch-similar-question-detail'
-import { SimilarQuestionDetailPageProps } from '@/types/pages'
+/* eslint-disable */
+
+import FetchSimilarQuestionDetail from "@/components/fetch-similar-question-detail"
+import { SimilarQuestionDetailPageProps } from "@/types/pages"
 
 export default async function SimilarQuestionDetailPage({
     params,

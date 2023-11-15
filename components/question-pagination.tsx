@@ -1,4 +1,6 @@
-'use client'
+/* eslint-disable */
+
+"use client"
 
 import {
     QuestionHrefProps,
@@ -7,19 +9,19 @@ import {
     getQuestionHrefWithQuery,
     getSectionHref,
     getVideoHrefWithQUery,
-} from '@/lib/href'
+} from "@/lib/href"
 import {
     saveIsRestartStore,
     saveIsSolvedStore,
     setIsLoadedStore,
     useIsSolvedStore,
-} from '@/store'
-import Theme from '@/themes/light'
-import { Question, Video } from '@/types/database/tables'
+} from "@/store"
+import Theme from "@/themes/light"
+import { Question, Video } from "@/types/database/tables"
 
-import Link from 'next/link'
-import { useEffect, useRef } from 'react'
-import { ThemeProvider, css, styled } from 'styled-components'
+import Link from "next/link"
+import { useEffect, useRef } from "react"
+import { ThemeProvider, css, styled } from "styled-components"
 
 type QueryProps = {
     sectionTitle: string
@@ -130,7 +132,7 @@ function getCustomHref({
         return getVideoHrefWithQUery({ videoId: nextId, ...hrefProps })
     }
 
-    return ''
+    return ""
 }
 
 const CustomLink = ({
@@ -219,16 +221,16 @@ const CustomLink = ({
         return null
     }
 
-    if (similar && href != '') {
+    if (similar && href != "") {
         return (
             <Link href={href} {...props}>
                 {children}
             </Link>
         )
     }
-    if (similar && href == '') {
+    if (similar && href == "") {
         return (
-            <Link href={''} tabIndex={-1} {...props}>
+            <Link href={""} tabIndex={-1} {...props}>
                 {children}
             </Link>
         )
@@ -247,11 +249,11 @@ const CustomLink = ({
                     {children}
                 </Link>
             ) : videoId ? (
-                <Link href={isSolved ? href : ''} {...props} tabIndex={-1}>
+                <Link href={isSolved ? href : ""} {...props} tabIndex={-1}>
                     {children}
                 </Link>
             ) : (
-                <Link href={''} tabIndex={-1} {...props}>
+                <Link href={""} tabIndex={-1} {...props}>
                     {children}
                 </Link>
             )}
@@ -334,7 +336,7 @@ const SLink = styled(CustomLink)`
         const { deactiveColor } = theme
         if (!similar && videoId) {
             const { deactiveColor } = theme
-            return !isSolved ? deactiveColor : 'black'
+            return !isSolved ? deactiveColor : "black"
         }
 
         if (
@@ -430,7 +432,7 @@ const SLi = styled(CustomLi)`
 
     color: ${({ isSolved, theme }) => {
         const { deactiveColor } = theme
-        return !isSolved ? deactiveColor : 'black'
+        return !isSolved ? deactiveColor : "black"
     }};
 
     &:hover {
@@ -496,7 +498,7 @@ export default function QuestionPagination({
         window.scrollBy({
             top,
             left: 0,
-            behavior: 'smooth',
+            behavior: "smooth",
         })
     }, [])
 

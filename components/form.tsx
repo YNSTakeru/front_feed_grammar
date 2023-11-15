@@ -1,14 +1,16 @@
-'use client'
-import { errorHandler } from '@/lib/async'
-import axios from '@/lib/axios'
-import { activateSubmitBtn, onBlurHandler } from '@/lib/form-validate'
-import { setTokenToCookie } from '@/lib/setData'
-import Theme from '@/themes/light'
-import { useRouter } from 'next/navigation'
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { ThemeProvider, styled } from 'styled-components'
-import Spinner from './spinner'
+/* eslint-disable */
+
+"use client"
+import { errorHandler } from "@/lib/async"
+import axios from "@/lib/axios"
+import { activateSubmitBtn, onBlurHandler } from "@/lib/form-validate"
+import { setTokenToCookie } from "@/lib/setData"
+import Theme from "@/themes/light"
+import { useRouter } from "next/navigation"
+import { forwardRef, useEffect, useRef, useState } from "react"
+import { useForm } from "react-hook-form"
+import { ThemeProvider, styled } from "styled-components"
+import Spinner from "./spinner"
 
 export type FormValues = {
     name: string
@@ -109,7 +111,7 @@ const SDt = styled.dt`
         font-weight: 600;
 
         &::before {
-            content: '必須';
+            content: "必須";
             font-size: 10px;
             display: inline-block;
             margin-right: 10px;
@@ -143,7 +145,7 @@ const SDd = styled.dd`
     }
 `
 
-type InputProps = React.ComponentPropsWithRef<'input'>
+type InputProps = React.ComponentPropsWithRef<"input">
 
 const CustomInput = forwardRef<HTMLInputElement, InputProps>(
     (
@@ -198,7 +200,7 @@ const SInput = styled(CustomInput)`
     }
 `
 
-type InputTextareaProps = React.ComponentPropsWithRef<'textarea'>
+type InputTextareaProps = React.ComponentPropsWithRef<"textarea">
 
 const CustomTextarea = forwardRef<HTMLTextAreaElement, InputTextareaProps>(
     (
@@ -289,7 +291,7 @@ const SLabel = styled.label`
     font-size: auto;
 
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         display: block;
         width: 20px;
@@ -301,7 +303,7 @@ const SLabel = styled.label`
         left: 3px;
     }
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         width: 12px;
         height: 5px;
@@ -385,7 +387,7 @@ const SButton = styled.button`
     border: none;
 
     &::before {
-        content: '';
+        content: "";
         width: 100%;
         height: 100%;
         position: absolute;
@@ -447,11 +449,11 @@ const SInvalidFeedback = styled(CustomDiv)`
 
 function convertDataToFormData(data: FormValues) {
     const formData = new FormData()
-    formData.append('name', data.name)
-    formData.append('email', data.email)
-    formData.append('contact', data.contact)
-    formData.append('answer', data.answer)
-    formData.append('agree', data.agree)
+    formData.append("name", data.name)
+    formData.append("email", data.email)
+    formData.append("contact", data.contact)
+    formData.append("answer", data.answer)
+    formData.append("agree", data.agree)
     return formData
 }
 
@@ -466,9 +468,9 @@ export default function Contact() {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        const script = document.createElement('script')
+        const script = document.createElement("script")
         script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY}`
-        script.setAttribute('async', '')
+        script.setAttribute("async", "")
         document.body.appendChild(script)
     }, [])
 
@@ -487,15 +489,15 @@ export default function Contact() {
                                     const recaptchaToken = await grecaptcha.execute(
                                         process.env
                                             .NEXT_PUBLIC_RECAPTCHA_CLIENT_KEY!,
-                                        { action: 'submit' },
+                                        { action: "submit" },
                                     )
                                     const response = await fetch(
-                                        'api/recaptcha',
+                                        "api/recaptcha",
                                         {
-                                            method: 'POST',
+                                            method: "POST",
                                             headers: {
-                                                'Content-Type':
-                                                    'application/json',
+                                                "Content-Type":
+                                                    "application/json",
                                             },
                                             body: JSON.stringify({
                                                 token: recaptchaToken,
@@ -505,9 +507,9 @@ export default function Contact() {
                                     const res = await response.json()
                                     if (!res.responseJsonRecaptcha.success) {
                                         console.error(
-                                            'reCAPTCHA: ',
+                                            "reCAPTCHA: ",
                                             res.responseJsonRecaptcha[
-                                                'error-codes'
+                                                "error-codes"
                                             ],
                                         )
                                         return
@@ -516,15 +518,15 @@ export default function Contact() {
                                     await setTokenToCookie()
                                     try {
                                         const response = await axios.post(
-                                            '/api/contact',
+                                            "/api/contact",
                                             convertDataToFormData(data),
                                         )
                                         if (!(+response.status == 204)) {
                                             //Todo 再度フォームを送信するように促す
-                                            console.log('送信に失敗しました')
+                                            console.log("送信に失敗しました")
                                             setLoading(false)
                                         }
-                                        router.push('/thanks')
+                                        router.push("/thanks")
                                     } catch (error) {
                                         errorHandler(error)
                                     }
@@ -541,7 +543,7 @@ export default function Contact() {
                                         autoFocus
                                         required
                                         maxLength={20}
-                                        {...register('name', {
+                                        {...register("name", {
                                             onBlur: e => {
                                                 onBlurHandler(
                                                     e,
@@ -565,7 +567,7 @@ export default function Contact() {
                                         placeholder="(例) abc@abc.com　(半角)"
                                         required
                                         pattern={emailRegexStr}
-                                        {...register('email', {
+                                        {...register("email", {
                                             onBlur: e => {
                                                 onBlurHandler(
                                                     e,
@@ -587,7 +589,7 @@ export default function Contact() {
                                     <STextarea
                                         placeholder="2000文字以内で入力してください"
                                         required
-                                        {...register('contact', {
+                                        {...register("contact", {
                                             onBlur: e => {
                                                 onBlurHandler(
                                                     e,
@@ -600,16 +602,16 @@ export default function Contact() {
                                 <SInvalidFeedback
                                     customRef={contactContentInvalidFeedbackRef}
                                 />
-                                <SDt className={'is-response'}>
+                                <SDt className={"is-response"}>
                                     <p>お問い合わせへの回答は必要ですか？</p>
                                 </SDt>
                                 <SDd>
                                     <SPadding>
                                         <SInputRadio
-                                            type={'radio'}
+                                            type={"radio"}
                                             id="radio01"
                                             value="回答必要"
-                                            {...register('answer', {
+                                            {...register("answer", {
                                                 onChange: _ => {
                                                     activateSubmitBtn()
                                                 },
@@ -619,10 +621,10 @@ export default function Contact() {
                                     </SPadding>
                                     <SPadding>
                                         <SInputRadio
-                                            type={'radio'}
+                                            type={"radio"}
                                             id="radio02"
                                             value="回答不要"
-                                            {...register('answer', {
+                                            {...register("answer", {
                                                 onChange: _ => {
                                                     activateSubmitBtn()
                                                 },
@@ -632,7 +634,7 @@ export default function Contact() {
                                     </SPadding>
                                 </SDd>
                                 <SPaddingUnderLine />
-                                <SDt className={'personal'}>
+                                <SDt className={"personal"}>
                                     <p>個人情報の取り扱いについて</p>
                                 </SDt>
                                 <SDd className="personal">
@@ -695,7 +697,7 @@ export default function Contact() {
                                             id="check01"
                                             value="同意します"
                                             required
-                                            {...register('agree', {
+                                            {...register("agree", {
                                                 onChange: _ => {
                                                     activateSubmitBtn()
                                                 },

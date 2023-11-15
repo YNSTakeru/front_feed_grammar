@@ -1,4 +1,6 @@
-import Contact from '@/components/form'
+/* eslint-disable */
+
+import Contact from "@/components/form"
 
 export default async function ContactPage() {
     return <Contact />

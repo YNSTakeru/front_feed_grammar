@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import '@/css/_app.css'
-import { SProgressBar } from '@/styles/styled-progress-bar'
-import { SSectionDetailPage } from '@/styles/styled-section-detail-page'
-import { SSectionList } from '@/styles/styled-section-list'
-import { SSectionListLayout } from '@/styles/styled-section-list-layout'
-import Theme from '@/themes/light'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import "@/css/_app.css"
+import { SProgressBar } from "@/styles/styled-progress-bar"
+import { SSectionDetailPage } from "@/styles/styled-section-detail-page"
+import { SSectionList } from "@/styles/styled-section-list"
+import { SSectionListLayout } from "@/styles/styled-section-list-layout"
+import Theme from "@/themes/light"
+import { ThemeProvider, createGlobalStyle } from "styled-components"
 
 const SGlobalStyle = createGlobalStyle`
     * {

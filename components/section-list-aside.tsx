@@ -1,12 +1,13 @@
-// Todo クライアントコンポーネントにできる、styled_componentsに切り替える
-'use client'
-import { getWindowSize } from '@/hooks/get-window.size'
-import Theme from '@/themes/light'
-import { SectionCollection } from '@/types/database/tables'
-import { useState } from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import SectionList from './section-list'
-import Spinner from './spinner'
+/* eslint-disable */
+
+"use client"
+import { getWindowSize } from "@/hooks/get-window.size"
+import Theme from "@/themes/light"
+import { SectionCollection } from "@/types/database/tables"
+import { useState } from "react"
+import styled, { ThemeProvider } from "styled-components"
+import SectionList from "./section-list"
+import Spinner from "./spinner"
 
 const CustomDiv = ({
     isOpen,
@@ -22,7 +23,7 @@ const SDiv = styled(CustomDiv)`
     height: 60px;
     max-height: 60px;
     transition: width 0.3s ease-out;
-    width: ${({ isOpen }) => (isOpen ? '100vw' : '35vw')};
+    width: ${({ isOpen }) => (isOpen ? "100vw" : "35vw")};
 
     @media (min-width: 768px) {
         display: flex;
@@ -40,7 +41,7 @@ const CustomButton = ({
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }) => (
     <button onClick={onClick} {...props}>
-        {!isOpen ? '単元一覧メニュー' : '単元一覧メニュー(閉じる)'}
+        {!isOpen ? "単元一覧メニュー" : "単元一覧メニュー(閉じる)"}
     </button>
 )
 
@@ -73,7 +74,7 @@ const SMobileSectionListMenu = styled(CustomMobileSectionListMenu)`
 
     background-color: ${({ theme }) => theme.asideBackgroundColor};
 
-    transform: ${({ isOpen }) => (isOpen ? 'translateX(100vw)' : 'none')};
+    transform: ${({ isOpen }) => (isOpen ? "translateX(100vw)" : "none")};
 `
 
 function SPadding({ children }: { children: React.ReactNode }) {

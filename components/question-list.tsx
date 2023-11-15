@@ -1,10 +1,12 @@
-'use client'
+/* eslint-disable */
 
-import { getQuestionHref, getSectionHref } from '@/lib/href'
-import { getUrlQuery } from '@/lib/url-query'
-import { QuestionCollection } from '@/types/database/tables'
-import Link from 'next/link'
-import { styled } from 'styled-components'
+"use client"
+
+import { getQuestionHref, getSectionHref } from "@/lib/href"
+import { getUrlQuery } from "@/lib/url-query"
+import { QuestionCollection } from "@/types/database/tables"
+import Link from "next/link"
+import { styled } from "styled-components"
 
 const SUl = styled.ul`
     margin-top: 20px;
@@ -29,15 +31,15 @@ export default function QuestionList({
     sectionId: number
     pageId: string
 }) {
-    const sectionTitle = getUrlQuery('title')!
+    const sectionTitle = getUrlQuery("title")!
     const sectionHref = getSectionHref({ sectionId })
     const questionList = questionListData.data
     const previousLink = questionListData.links.prev
         ? questionListData.links.prev
-        : ''
+        : ""
     const nextLink = questionListData.links.next
         ? questionListData.links.next
-        : ''
+        : ""
 
     const prevPageNum = previousLink[previousLink.length - 1]
         ? previousLink[previousLink.length - 1]

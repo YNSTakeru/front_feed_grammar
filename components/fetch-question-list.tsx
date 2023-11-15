@@ -1,5 +1,5 @@
-import { fetchQuestionListData } from '@/lib/fetchData'
-import QuestionList from './question-list'
+import { fetchQuestionListData } from "@/lib/fetchData"
+import QuestionList from "./question-list"
 
 export default async function FetchQuestionList({
     sectionId,

@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import Theme from '@/themes/light'
-import Link from 'next/link'
-import { useRef } from 'react'
-import styled, { ThemeProvider, css } from 'styled-components'
+"use client"
+
+import Theme from "@/themes/light"
+import Link from "next/link"
+import { useRef } from "react"
+import styled, { ThemeProvider, css } from "styled-components"
 
 type Question = {
     content: string

@@ -1,14 +1,16 @@
-import { NextResponse } from 'next/server'
+/* eslint-disable */
 
-export async function POST(request: Request) {
+import { NextResponse } from "next/server"
+
+async function POST(request: Request) {
     const res = await request.json()
     const serverSecretKey = `secret=${process.env.RECAPTCHA_SERVER_SECRET_KEY}&response=${res.token}`
     const responseRecaptcha = await fetch(
-        'https://www.google.com/recaptcha/api/siteverify',
+        "https://www.google.com/recaptcha/api/siteverify",
         {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                "Content-Type": "application/x-www-form-urlencoded",
             },
             body: serverSecretKey,
         },
@@ -18,5 +20,3 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ responseJsonRecaptcha })
 }
-
-export default POST

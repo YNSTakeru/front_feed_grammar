@@ -1,6 +1,8 @@
-'use client'
+/* eslint-disable */
 
-import { styled } from 'styled-components'
+"use client"
+
+import { styled } from "styled-components"
 
 type CustomDivProps = {
     className?: string

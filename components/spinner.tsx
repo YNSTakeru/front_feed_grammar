@@ -1,39 +1,45 @@
-'use client'
+/* eslint-disable */
 
-import styled from 'styled-components'
+"use client"
+
+import styled from "styled-components"
 
 const SDivWrapper = styled.div`
-  margin: 64px;
-  display: flex;
-  justify-content: center;
+    margin: 64px;
+    display: flex;
+    justify-content: center;
 `
 
 const CustomDiv = ({ color, ...props }: { color: string }) => {
-  return <div {...props} />
+    return <div {...props} />
 }
 
 const SDiv = styled(CustomDiv)`
-  height: 40px;
-  width: 40px;
-  border-radius: 9999px;
-  border: 4px solid ${({ color }) => color};
-  border-top-color: transparent;
+    height: 40px;
+    width: 40px;
+    border-radius: 9999px;
+    border: 4px solid ${({ color }) => color};
+    border-top-color: transparent;
 
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
 `
 
-export default function Spinner({ color = 'rgb(59, 130, 246)' }: { color?: string }) {
-  return (
-    <SDivWrapper>
-      <SDiv color={color} />
-    </SDivWrapper>
-  )
+export default function Spinner({
+    color = "rgb(59, 130, 246)",
+}: {
+    color?: string
+}) {
+    return (
+        <SDivWrapper>
+            <SDiv color={color} />
+        </SDivWrapper>
+    )
 }

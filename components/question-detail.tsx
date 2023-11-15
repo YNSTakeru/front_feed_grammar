@@ -1,26 +1,28 @@
-'use client'
+/* eslint-disable */
+
+"use client"
 
 import {
     getNextArrayValue,
     getPrevArrayValue,
     getRandomValueFromArray,
-} from '@/lib/array'
+} from "@/lib/array"
 import {
     QuestionHrefQuery,
     getQuestionHref,
     getQuestionHrefWithQuery,
     getSectionHref,
     getSectionHrefWithQuery,
-} from '@/lib/href'
-import { getUrlQuery } from '@/lib/url-query'
-import { Video } from '@/types/database/tables'
-import { useEffect, useState } from 'react'
-import { styled } from 'styled-components'
-import BreadcrumbsList from './breadcrumbs-list'
-import QuestionPagination from './pagination/question-pagination'
-import ProgressBar from './progress-bar'
-import QuestionArea from './question-area'
-import YouTubeArea from './youtube-area'
+} from "@/lib/href"
+import { getUrlQuery } from "@/lib/url-query"
+import { Video } from "@/types/database/tables"
+import { useEffect, useState } from "react"
+import { styled } from "styled-components"
+import BreadcrumbsList from "./breadcrumbs-list"
+import QuestionPagination from "./pagination/question-pagination"
+import ProgressBar from "./progress-bar"
+import QuestionArea from "./question-area"
+import YouTubeArea from "./youtube-area"
 
 type Question = {
     content: string
@@ -204,13 +206,13 @@ export default function QuestionDetail({
     const [isDisplay, setDisplay] = useState(false)
     const [pageWidth, setPageWidth] = useState(0)
 
-    const content = getUrlQuery('content')!
-    const sectionTitle = getUrlQuery('title')!
-    const questionTheme = getUrlQuery('question-theme')!
-    const startQuestionId = +getUrlQuery('start-question-id')!
-    const endQuestionId = +getUrlQuery('end-question-id')!
-    const startSimilarVideoId = +getUrlQuery('start-similar-video-id')!
-    const endSimilarVideoId = +getUrlQuery('end-similar-video-id')!
+    const content = getUrlQuery("content")!
+    const sectionTitle = getUrlQuery("title")!
+    const questionTheme = getUrlQuery("question-theme")!
+    const startQuestionId = +getUrlQuery("start-question-id")!
+    const endQuestionId = +getUrlQuery("end-question-id")!
+    const startSimilarVideoId = +getUrlQuery("start-similar-video-id")!
+    const endSimilarVideoId = +getUrlQuery("end-similar-video-id")!
 
     const breadcrumbsListProps: BreadcrumbsListProps = {
         questionContent: content,

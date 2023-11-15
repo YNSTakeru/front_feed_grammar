@@ -1,6 +1,8 @@
-import SectionListAside from '@/components/section-list-aside'
-import { fetchSectionListData } from '@/lib/fetchData'
-import React from 'react'
+/* eslint-disable */
+
+import SectionListAside from "@/components/section-list-aside"
+import { fetchSectionListData } from "@/lib/fetchData"
+import React from "react"
 
 function SSection({ children }: { children: React.ReactNode }) {
     return (

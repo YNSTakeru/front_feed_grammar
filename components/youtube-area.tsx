@@ -1,15 +1,17 @@
-import { errorHandler } from '@/lib/async'
+/* eslint-disable */
+
+import { errorHandler } from "@/lib/async"
 import {
     saveIsRestartStore,
     setIsLoadedStore,
     useIsLoadedStore,
     useIsRestartStore,
     useIsSolvedStore,
-} from '@/store'
-import { Video } from '@/types/database/tables'
-import { useEffect, useLayoutEffect, useState } from 'react'
-import YouTube, { YouTubeEvent, YouTubeProps } from 'react-youtube'
-import { styled } from 'styled-components'
+} from "@/store"
+import { Video } from "@/types/database/tables"
+import { useEffect, useLayoutEffect, useState } from "react"
+import YouTube, { YouTubeEvent, YouTubeProps } from "react-youtube"
+import { styled } from "styled-components"
 
 function CustomYouTube({
     videoId,
@@ -40,8 +42,8 @@ export default function YouTubeArea({
     width: number
 }) {
     const [opts, setOpts] = useState({
-        height: '390',
-        width: '0',
+        height: "390",
+        width: "0",
         playerVars: {
             autoplay: 1 as 1,
             mute: 1 as 1,
@@ -60,7 +62,7 @@ export default function YouTubeArea({
 
     useLayoutEffect(() => {
         setOpts(prev => ({
-            height: '390',
+            height: "390",
             width: `${width}`,
             playerVars: {
                 autoplay: 1 as 1,
@@ -69,9 +71,9 @@ export default function YouTubeArea({
                 disablekb: 1 as 1,
             },
         }))
-        window.addEventListener('resize', () => {
+        window.addEventListener("resize", () => {
             setOpts(prev => ({
-                height: '390',
+                height: "390",
                 width: `${window.innerWidth * 0.5 - 15}`,
                 playerVars: {
                     autoplay: 1 as 1,
@@ -92,7 +94,7 @@ export default function YouTubeArea({
         )
 
         const $progressBar = document.querySelector(
-            '.progress__bar .before',
+            ".progress__bar .before",
         ) as HTMLDivElement
         if (!$progressBar) return
         $progressBar.style.transform = `translateX(${progressPercent}%)`
@@ -114,12 +116,12 @@ export default function YouTubeArea({
         setIsLoadedStore(false)
     }, [])
 
-    const onPlayerReady: YouTubeProps['onReady'] = event => {
+    const onPlayerReady: YouTubeProps["onReady"] = event => {
         event.target.seekTo(+video.start_time, true)
         event.target.playVideo()
     }
 
-    const onStateChange: YouTubeProps['onStateChange'] = event => {
+    const onStateChange: YouTubeProps["onStateChange"] = event => {
         if (event.data === YouTube.PlayerState.PLAYING) {
             setEvent(prev => event)
             event.target.unMute()

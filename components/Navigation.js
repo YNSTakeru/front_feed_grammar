@@ -1,19 +1,17 @@
-"use client";
+"use client"
 
-import ApplicationLogo from './ApplicationLogo'
-import Dropdown from './Dropdown'
-import Link from 'next/link'
-import NavLink from './NavLink'
-import ResponsiveNavLink, {
-    ResponsiveNavButton,
-} from './ResponsiveNavLink'
-import { DropdownButton } from './DropdownLink'
-import { useAuth } from '@/hooks/auth'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useAuth } from "@/hooks/auth"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import ApplicationLogo from "./ApplicationLogo"
+import Dropdown from "./Dropdown"
+import { DropdownButton } from "./DropdownLink"
+import NavLink from "./NavLink"
+import ResponsiveNavLink, { ResponsiveNavButton } from "./ResponsiveNavLink"
 
 const Navigation = () => {
-    const { user } = useAuth({ middleware: 'auth' })
+    const { user } = useAuth({ middleware: "auth" })
 
     const router = useRouter()
 
@@ -23,7 +21,7 @@ const Navigation = () => {
 
     // If user is undefined, it's still loading.
     if (typeof user === "undefined") {
-        return null; // or return a loading spinner, or some placeholder content.
+        return null // or return a loading spinner, or some placeholder content.
     }
 
     return (
@@ -43,7 +41,7 @@ const Navigation = () => {
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
+                                active={router.pathname === "/dashboard"}>
                                 Dashboard
                             </NavLink>
                         </div>
@@ -118,7 +116,7 @@ const Navigation = () => {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
                             href="/dashboard"
-                            active={router.pathname === '/dashboard'}>
+                            active={router.pathname === "/dashboard"}>
                             Dashboard
                         </ResponsiveNavLink>
                     </div>

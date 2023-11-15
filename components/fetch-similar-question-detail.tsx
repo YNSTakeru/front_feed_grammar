@@ -1,5 +1,5 @@
-import { fetchVideos } from '@/lib/fetchData'
-import QuestionDetail from './question-detail'
+import { fetchVideos } from "@/lib/fetchData"
+import QuestionDetail from "./question-detail"
 
 export default async function FetchSimilarQuestionDetail({
     videoId,

@@ -1,9 +1,11 @@
-'use client'
+/* eslint-disable */
 
-import useStore from '@/store'
-import Link from 'next/link'
-import { useEffect } from 'react'
-import { styled } from 'styled-components'
+"use client"
+
+import useStore from "@/store"
+import Link from "next/link"
+import { useEffect } from "react"
+import { styled } from "styled-components"
 
 const CustomLink = ({
     id,

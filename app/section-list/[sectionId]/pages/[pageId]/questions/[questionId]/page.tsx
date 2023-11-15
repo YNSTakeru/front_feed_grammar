@@ -1,5 +1,7 @@
-import FetchQuestionDetail from '@/components/fetch-question-detail'
-import { QuestionDetailPageProps } from '@/types/pages'
+/* eslint-disable */
+
+import FetchQuestionDetail from "@/components/fetch-question-detail"
+import { QuestionDetailPageProps } from "@/types/pages"
 
 export default async function QuestionDetailPage({
     params,

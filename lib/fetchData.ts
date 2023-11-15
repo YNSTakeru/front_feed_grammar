@@ -1,14 +1,16 @@
+/* eslint-disable */
+
 import {
     QuestionCollection,
     QuestionLink,
     SectionCollection,
     Video,
-} from '@/types/database/tables'
+} from "@/types/database/tables"
 
 async function fetchISR(url: string) {
     const res = await fetch(url, { next: { revalidate: 10 } })
 
-    if (!res.ok) throw new Error('サーバーからデータの取得に失敗しました。')
+    if (!res.ok) throw new Error("サーバーからデータの取得に失敗しました。")
 
     return res
 }
@@ -46,7 +48,7 @@ export async function fetchQuestionLink(questionId: number) {
 
 export async function fetchVideos({
     questionId,
-    pageId = '1',
+    pageId = "1",
 }: {
     questionId: string
     pageId: string

@@ -1,6 +1,6 @@
 // import axios from 'axios'
-import { errorHandler } from './async'
-import { axiosToken } from './axios'
+import { errorHandler } from "./async"
+import { axiosToken } from "./axios"
 
 export async function setTokenToCookie() {
     await fetchToken()

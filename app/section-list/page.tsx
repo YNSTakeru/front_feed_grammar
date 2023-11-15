@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { getWindowSize } from '@/hooks/get-window.size'
-import Theme from '@/themes/light'
-import { ThemeProvider, styled } from 'styled-components'
+import { getWindowSize } from "@/hooks/get-window.size"
+import Theme from "@/themes/light"
+import { ThemeProvider, styled } from "styled-components"
 
 function SDiv({ children }: { children: React.ReactNode }) {
     return <div className="section__list__div">{children}</div>

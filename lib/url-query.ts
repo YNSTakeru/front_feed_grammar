@@ -1,5 +1,5 @@
-'use client'
-import { useSearchParams } from 'next/navigation'
+"use client"
+import { useSearchParams } from "next/navigation"
 
 export function getUrlQuery(title: string) {
     const searchParams = useSearchParams()
