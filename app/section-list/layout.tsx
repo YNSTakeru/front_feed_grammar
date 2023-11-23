@@ -24,6 +24,7 @@ export default async function SectionLayout({
     children: React.ReactNode
 }) {
     const sectionListData = await fetchSectionListData()
+
     return (
         <SSection>
             <SAside>

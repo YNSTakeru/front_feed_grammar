@@ -20,6 +20,7 @@ export async function fetchSectionListData(pageNum = 1) {
         `${process.env.NEXT_PUBLIC_URL}/api/sections?page=${pageNum}`,
     )
     const sectionListData: SectionCollection = await res.json()
+
     return sectionListData
 }
 
