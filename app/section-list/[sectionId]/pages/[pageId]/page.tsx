@@ -32,6 +32,8 @@ export default async function SectionDetailPage({
 }: SectionDetailPageProps) {
     const { sectionId, pageId } = params
 
+    if (!sectionId) return <h1>なし</h1>
+
     return (
         <SSectionDetailPageWrapper>
             <SectionDetailTitle />
