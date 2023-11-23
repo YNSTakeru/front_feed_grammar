@@ -4,7 +4,6 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "prebuild": "node prebuild.js",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
@@ -13,7 +12,7 @@
     "dependencies": {
         "@headlessui/react": "^1.4.2",
         "@heroicons/react": "^2.0.18",
-        "@netlify/plugin-nextjs": "^4.36.1",
+        "@netlify/plugin-nextjs": "^4.41.2",
         "@types/grecaptcha": "^3.0.4",
         "@types/youtube-player": "^5.5.7",
         "axios": "^0.21.1",
