@@ -147,7 +147,7 @@ const SLi = styled(CustomLi)`
 `
 
 function splitAnswer(answer: string) {
-    const pattern = /[\w\s\’\'\,\"\-]*[\.]{0,3}[\w\s\’\'\,¥-]*/
+    const pattern = /[\w\s\’\'\,\"\-\:]*[\.]{0,3}[\w\s\:\’\'\,¥-]*/
     const space = /\s/
     const matches = answer.match(pattern)![0].trim()
     const words = matches.split(space).map(word => {
@@ -159,7 +159,7 @@ function splitAnswer(answer: string) {
 }
 
 function splitDisplayAnswer(answer: string) {
-    const pattern = /[\w\s\.\,\?\!\"\'\’\'\-]*/
+    const pattern = /[\w\s\.\,\?\!\"\'\’\'\-\:]*/
     const space = /\s/
     const matches = answer.match(pattern)![0]
     return matches.split(space)
