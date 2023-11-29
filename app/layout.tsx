@@ -23,6 +23,10 @@ export default function RootLayout({
     return (
         <html lang="ja">
             <head>
+                <meta
+                    name="google-adsense-account"
+                    content="ca-pub-7441958759299413"
+                />
                 <script
                     async
                     src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
