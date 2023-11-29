@@ -22,13 +22,17 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ja">
+            <head>
+                <script
+                    async
+                    src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}`}
+                    crossOrigin="anonymous"></script>
+            </head>
             <body>
                 <StyledComponentsRegistry>
-                    <body>
-                        <GlobalStyle />
-                        <Header />
-                        {children}
-                    </body>
+                    <GlobalStyle />
+                    <Header />
+                    {children}
                 </StyledComponentsRegistry>
             </body>
         </html>
