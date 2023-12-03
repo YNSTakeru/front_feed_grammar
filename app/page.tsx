@@ -21,7 +21,7 @@ const CustomMainWrapper = ({
 const SMainWrapper = styled(CustomMainWrapper)`
     padding: 16px;
     width: 100vw;
-    height: ${({ theme }) => `calc(100vh - ${theme.headerHeight})`};
+    height: ${({ theme }) => `calc(100vh - 40px - ${theme.headerHeight})`};
     display: flex;
     justify-content: center;
     opacity: ${({ width }) => (width ? 1 : 0)};
