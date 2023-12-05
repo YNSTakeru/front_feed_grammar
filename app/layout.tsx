@@ -1,12 +1,13 @@
 /* eslint-disable */
 
+import GoogleAnalytics from "@/components/GoogleAnalytics"
 import Footer from "@/components/footer"
 import GlobalStyle from "@/components/global-style"
 import Header from "@/components/header"
 import StyledComponentsRegistry from "@/lib/styled-components/registry"
 
 const siteName = "Feed Grammar"
-const description = "英文法を勉強するサイトです"
+const description = "YouTubeの動画を使って英語をリスニングするサイトです。"
 
 export const metadata = {
     title: {
@@ -24,6 +25,7 @@ export default function RootLayout({
     return (
         <html lang="ja">
             <head>
+                <GoogleAnalytics />
                 <meta
                     name="google-adsense-account"
                     content="ca-pub-7441958759299413"
