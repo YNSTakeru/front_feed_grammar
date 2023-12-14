@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css } from "styled-components"
 
 export const SSectionListLayout = css`
     .section__list__layout {
@@ -10,6 +10,7 @@ export const SSectionListLayout = css`
                 flex-direction: row;
             }
         }
+
         &__aside {
             display: block;
             height: initial;
@@ -26,6 +27,7 @@ export const SSectionListLayout = css`
                     `calc(100vh - ${theme.headerHeight})`};
             }
         }
+
         &__div {
             width: 100vw;
             height: 100vh;

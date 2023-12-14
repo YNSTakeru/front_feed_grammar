@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import GoogleAnalytics from "@/components/GoogleAnalytics"
-import Footer from "@/components/footer"
 import GlobalStyle from "@/components/global-style"
 import Header from "@/components/header"
 import StyledComponentsRegistry from "@/lib/styled-components/registry"
@@ -40,7 +39,7 @@ export default function RootLayout({
                     <GlobalStyle />
                     <Header />
                     {children}
-                    <Footer />
+                    {/* <Footer /> */}
                 </StyledComponentsRegistry>
             </body>
         </html>

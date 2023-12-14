@@ -10,11 +10,17 @@ import { ThemeProvider, styled } from "styled-components"
 const CustomNav = ({
     width,
     children,
+    className,
     ...props
 }: {
     width: number
+    className?: string
     children: React.ReactNode
-}) => <nav {...props}>{children}</nav>
+}) => (
+    <nav className={`nav ${className}`} {...props}>
+        {children}
+    </nav>
+)
 
 const SNav = styled(CustomNav)`
     font-size: 14px;

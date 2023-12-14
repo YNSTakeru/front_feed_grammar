@@ -161,7 +161,35 @@ const SContainer = styled.div`
     }
 `
 
-const SMainWrapper = styled.div`
+const CustomMainWrapper = ({
+    children,
+    className,
+    ...props
+}: {
+    className?: string
+    children: React.ReactNode
+}) => {
+    useEffect(() => {
+        const $mainWrapper = document.querySelector(".main__wrapper")!
+        const $nav = document.querySelector(".nav")!
+        const $asideHeight = document.querySelector(
+            ".section__list__layout__aside",
+        )!
+
+        $asideHeight.setAttribute(
+            "style",
+            `height: ${$mainWrapper.clientHeight + $nav.clientHeight}px`,
+        )
+    }, [])
+
+    return (
+        <div className={`main__wrapper ${className}`} {...props}>
+            {children}
+        </div>
+    )
+}
+
+const SMainWrapper = styled(CustomMainWrapper)`
     & .question__area {
         margin-top: 30px;
     }
